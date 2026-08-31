@@ -22,5 +22,6 @@ Current issues:
   - It accelerates way too fast, the “time” input kinda useless. Needs some resistance
   - Poor interface, want to make it cooler, add more functionality (sport mode among other things), add some buttons to make it user-friendly.
   - Is using the buttons/display on the ev3 ever cool? Add some functionality there, most likely the real time speed. (MUCH NEEDED, I have no idea what’s going on sometimes)
+  - Maybe add a joystick using the ultrasonic sensor
   - Also mechanically, the ecvt needs some bracing
   - Speaking of slowing it down, adding a winch and making it pull something would be super cool. That way I can finally use the sensors I imported (duh). If you see those, this is why, I just haven’t really gotten around to it. 
