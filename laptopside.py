@@ -1,8 +1,10 @@
 import socket
 from math import pi
 
+#initialize socket connection
 s=socket.socket()
-s.connect(("169.254.29.168", 9999))
+#add ip address (changes every boot cycle), 9999 password
+s.connect(("ev3dev ip address", 9999))
 
 def speed_calc(current, wanted_wheel_speed, battery_percentage, time_delta):
     time_delta = max(time_delta, 0.001) 
