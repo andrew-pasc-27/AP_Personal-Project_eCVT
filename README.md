@@ -19,9 +19,8 @@ File Descriptions:
  - After the payload is sent, the ev3 just runs it.  
 
 Current issues:
-  - It accelerates way too fast, the “time” input kinda useless. Needs some resistance
+  - It accelerates way too fast, the “time” input kinda useless. Needs some resistance or some code edits. For example, if I change the functionality so that it sends one call every second on an interval (which represents the total time), lets say, it would accelerate every second (which is still too fast unfortunately, but if i put too small of a time gap between calls its going to bottleneck the cpu and cause insanely high latency (poor ev3). another option is to have the ev3 do that itself, but that raises even more issues so maybe not.
+  - if i send it backwards, it just reverses everything, which is no bueno. The engine should only spin in the positive direction (because that is what engines do), and mg2 will actually do the backwards work while mg1 just compensates. Need to code for that. 
   - Poor interface, want to make it cooler, add more functionality (sport mode among other things), add some buttons to make it user-friendly.
   - Is using the buttons/display on the ev3 ever cool? Add some functionality there, most likely the real time speed. (MUCH NEEDED, I have no idea what’s going on sometimes)
-  - Maybe add a joystick using the ultrasonic sensor
-  - Also mechanically, the ecvt needs some bracing
-  - Speaking of slowing it down, adding a winch and making it pull something would be super cool. That way I can finally use the sensors I imported (duh). If you see those, this is why, I just haven’t really gotten around to it. 
+  - Maybe add a joystick using the ultrasonic sensor (joystick built, need to add code functionality) (also the reason I imported it duh. so if you see it, this is why)
