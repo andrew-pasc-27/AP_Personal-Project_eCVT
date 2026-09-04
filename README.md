@@ -7,20 +7,27 @@ Disclaimers:
  - ev3dev-stretch was used to make the ev3 support python.
  - all speeds are taken in w, or angular velocity, makes data nice and consistent and also matches well with online planetary gear set equations
 
-File Descriptions:
+Current issues:
+ - Clicking issue with the mechanism… can’t truly pinpoint where it is coming from.
+ - laptopside.py has no way to calculate acceleration, button press for adding/subtracting speed has a static magnitude.
+ - ev3controller.py: needs socket connection to laptop
+
+Newest updates:
+ - tkinter interface introduced for laptopside.py
+ - ev3controller.py: color sensor used to create joystick, using built in .reflected_light_intensity attribute, returns a value from 0-100, right now, 40 is the middle value (higher than 40 accelerates, less than decelerates). It’s a nice fix because it allows you to directly modify acceleration, though needs to be configured to talk to the laptop so gui can be used and possibly matlab graphs.
+ - updated mechanical strength of ecvt
+
+
+
+
+
+V1 code file descriptions (commits 1-10):
  - data farms 1 and 2 both run tests on my ecvt, collecting data on each 3 motors speed in order to establish a relationship
 
  - data analysis uses numpy’s least squares algorithm (lstsq()) to establish a relationship between each speed, so mg1, engine, and mg2. Its result is then copy-and-pasted into laptopside.py
 
- - Now, the fun files (alliteration): ev3side and laptopside.
- - The reason I separated ev3side and laptop side was for a few reasons, but mainly that I wanted it to be future proof for any revisions, such as an upgrade to an actual interface using pygames or tkinter. Also, many of the normal python libraries, such as numpy, dont exist on ev3 stretch due to its limited functionality, so separating the laptop and ev3 was pretty necessary for any higher level coding.
- - They are separated using sockets, essentially the ev3 is booted up and it runs its code file (after being plugged in and establishing an IP), and then the laptop file is run. The laptop looks for the ev3’s IP address and establishes a connection.
- - After that, the laptopside code file uses a pretty rudimentary interface (the terminal haha) to ask the user to input a wanted speed, a battery percentage (modeling an actual ecvt, which has limited battery), and a time it has to accelerate in. It then packages this and sends it to the ev3. Pretty cool.
- - After the payload is sent, the ev3 just runs it.  
-
-Current issues:
-  - It accelerates way too fast, the “time” input kinda useless. Needs some resistance or some code edits. For example, if I change the functionality so that it sends one call every second on an interval (which represents the total time), lets say, it would accelerate every second (which is still too fast unfortunately, but if i put too small of a time gap between calls its going to bottleneck the cpu and cause insanely high latency (poor ev3). another option is to have the ev3 do that itself, but that raises even more issues so maybe not.
-  - if i send it backwards, it just reverses everything, which is no bueno. The engine should only spin in the positive direction (because that is what engines do), and mg2 will actually do the backwards work while mg1 just compensates. Need to code for that. 
-  - Poor interface, want to make it cooler, add more functionality (sport mode among other things), add some buttons to make it user-friendly.
-  - Is using the buttons/display on the ev3 ever cool? Add some functionality there, most likely the real time speed. (MUCH NEEDED, I have no idea what’s going on sometimes)
-  - Maybe add a joystick using the ultrasonic sensor (joystick built, need to add code functionality) (also the reason I imported it duh. so if you see it, this is why)
+ - ev3side.py and laptopside.py
+The reason I separated ev3side and laptop side was for a few reasons, but mainly that I wanted it to be future proof for any revisions, such as an upgrade to an actual interface using pygames or tkinter. Also, many of the normal python libraries, such as numpy, dont exist on ev3 stretch due to its limited functionality, so separating the laptop and ev3 was pretty             necessary for any higher level coding.
+They are separated using sockets, essentially the ev3 is booted up and it runs its code file (after being plugged in and     establishing an IP), and then the laptop file is run. The laptop looks for the ev3’s IP address and establishes a connection.
+After that, the laptopside code file uses a pretty rudimentary interface (the terminal haha) to ask the user to input a wanted speed, a battery percentage (modeling an actual ecvt, which has limited battery), and a time it has to accelerate in. It then packages this and sends it to the ev3. Pretty cool.
+After the payload is sent, the ev3 just runs it.  
