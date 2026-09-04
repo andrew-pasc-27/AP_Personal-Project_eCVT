@@ -26,8 +26,7 @@ V1 code file descriptions (commits 1-10):
 
  - data analysis uses numpy’s least squares algorithm (lstsq()) to establish a relationship between each speed, so mg1, engine, and mg2. Its result is then copy-and-pasted into laptopside.py
 
- - ev3side.py and laptopside.py
-The reason I separated ev3side and laptop side was for a few reasons, but mainly that I wanted it to be future proof for any revisions, such as an upgrade to an actual interface using pygames or tkinter. Also, many of the normal python libraries, such as numpy, dont exist on ev3 stretch due to its limited functionality, so separating the laptop and ev3 was pretty             necessary for any higher level coding.
+ - ev3side.py and laptopside.py: the reason I separated ev3side and laptop side was for a few reasons, but mainly that I wanted it to be future proof for any revisions, such as an upgrade to an actual interface using pygames or tkinter. Also, many of the normal python libraries, such as numpy, dont exist on ev3 stretch due to its limited functionality, so separating the laptop and ev3 was pretty             necessary for any higher level coding.
 They are separated using sockets, essentially the ev3 is booted up and it runs its code file (after being plugged in and     establishing an IP), and then the laptop file is run. The laptop looks for the ev3’s IP address and establishes a connection.
 After that, the laptopside code file uses a pretty rudimentary interface (the terminal haha) to ask the user to input a wanted speed, a battery percentage (modeling an actual ecvt, which has limited battery), and a time it has to accelerate in. It then packages this and sends it to the ev3. Pretty cool.
 After the payload is sent, the ev3 just runs it.  
