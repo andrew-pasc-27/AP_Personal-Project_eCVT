@@ -2,7 +2,7 @@
 Personal Project recreating ecvt from LEGO Mindstorms. 
 
 Disclaimers:
- - this is a model of Toyota’s ecvt, so variable names correspond to ecvt parts (mg1, engine, mg2.
+ - this is a model of Toyota’s ecvt, so variable names correspond to ecvt parts (mg1, engine, mg2).
  - Mg1 uses a medium ev3 motor, while the engine and mg2 use large motors
  - ev3dev-stretch was used to make the ev3 support python.
  - All speeds are in w, or angular velocity, which makes data nice and consistent and also matches well with online planetary gear set equations.
