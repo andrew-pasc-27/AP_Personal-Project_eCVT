@@ -1,10 +1,7 @@
 # AP_personal_project_eCVT
-Personal Project recreating ecvt from LEGO Mindstorms. 
-
-
 Model of Toyota’s hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms. 
 
-## Hardware:
+## Hardware
 ### Mechanical Parts description: 
  - 4 11x11 Quarter Gear Rings were used to assemble the ring gear, a connector hub with three axles (120 degrees apart) was used to transfer ring gear rotation into an axle rotation. Axle is connected to 40 tooth gear, which is reduced to a 24 tooth gear when connected to mg2. 
  - 60 tooth turntable (piece with hole in middle, where axle connecting to sun gear lies) was used to power the carrier. It is meshed with a twelve tooth gear. 
@@ -20,13 +17,61 @@ Model of Toyota’s hybrid transmission, known as the eCVT (electronic continuou
  - Mindstorms ev3 brick used with a flashed SD card that holds an [ev3dev-stretch boot image](https://www.ev3dev.org/downloads/).
  - Built in PID controllers allow motors to maintain speed regardless of driven wheel resistance.
 
-## Software:
+## Kinematics Equations
+### Theoretical Equation:
+ - The kinematic equation for a standard planetary gear set, known as the Willis Equation, is (1+𝑘)𝜔𝐶=𝜔𝑆+𝑘𝜔𝑅
+ - K is number of teeth on ring gear divided by number of teeth on sun gear. C corresponds to carrier, S to sun, and R to ring.
+ - Substituting known inputs: (1+k) * b * ENGINE = a * MG1 + k * c * MG2
+ - Calculating K: 140T / 36T = 3.889
+ - However, because gears are not directly connected to motors, gear reductions have to be accounted for, hence the added coefficients.
+ - Below equations use input/output.
+ - MG1 -> Sun: a = -12/20 = -0.6 (Because there are 2 planets, we multiply by -1)
+ - Engine -> Carrier: b = 12/60 = 0.2 
+ - MG2 -> Ring: c = 24/40 = 0.6
+
+ - Substituting everything in:
+ - (1 + 3.889) * 0.2 * ENGINE = 0.6 * MG1 + 3.889 * 0.6 * MG2
+ - Simplifying:
+ - 0 = - 0.6 * MG1 - 0.9778 * ENGINE + 2.334 * MG2
+ - Represents a plane with coordinates (MG1, ENGINE, MG2), normal vector = <-0.6, -0.9778, 2.334>
+
+### Empirical Model:
+ - Empirical data on angular velocity was collected from data_farm_1.py and data_farm_2.py. [CSV of data](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/eCVT%20spreadsheet%20-%20Sheet%201.csv).
+ - This data was put through the least squares regression model in data_analysis.py.
+ - Resulting regression: - 0.44254819615742197 = - 0.2605291672 * MG1 - 0.25062775461909614 * ENGINE + MG2 
+ - Since this also represents a plane, normal vector = <-0.261, -0.251, 1> (Assuming coordinates of (MG1, ENGINE, MG2)
+ - R^2 of regression was 0.997, which means most of the variance is accounted for in the aforementioned regression.
+
+### Theoretical vs. Empirical
+
+#### Simple Comparison
+ - n1 = <-0.6, -0.9778, 2.334>
+ - n2 = <-0.261, -0.251, 1>
+
+ - Dividing n1 by 2.334 to get a similar vector:
+ - n1/2.334 = <-0.257, -0.42, 1>
+
+ - The vectors share some similarities, however, the engine has a lot more impact on the final result in theory.
+
+#### In-depth comparison
+
+ - Dotting n1 and n2:
+ - n1 . n2 = 0.157 + 0.245 + 2.334 = 2.736
+ - Product of magnitudes
+ - |n1| * |n2| = 2.766
+ - Finding ø from arccos(2.736 / 2.766)
+ - ø = 8.446 deg
+
+ - The vectors are very close in direction, only 8 degrees off. The difference likely lies in mechanical constraints.
+ - This result means the mechanism itself causes some error, but not by much, which is nice.
+
+## Software
 ### Code File descriptions (Latest file first):
  - ev3controller.py: A standalone control code file using color sensor joystick, combining most of the functionality from [ev3side.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3side.py) and [laptopside.py](laptopside.py). Uses regression equation from [data_analysis.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_analysis.py). The joystick allows for a non-constant acceleration for improved model accuracy, for example, the engine turns on when pedal is floored, regardless of speed. Added ev3 display functionality, which displays drive gear (reverse, neutral, drive), speed, and measured voltage of the ev3 battery. Ev3 button functionality introduced, using up, middle, and down buttons for drive gear; left and right buttons used for emergency brake. Encountered runtime issues due to ev3 limited functionality, which was solved by updating the display and checking the battery less.
 
  - ev3side.py and laptopside.py: Two files that are connected using sockets. Due to limited functionality of ev3, I separated the ev3 and laptop so a GUI could be introduced. To connect, the ev3 is booted up and it runs its code file (after being plugged in and establishing an IP) and waits for a connection from another device (the laptop). The laptop looks for the ev3’s IP address and establishes a connection once found. After the connection is made, the interface waits for a press of the gas button/brake buttons. It calculates the mg1/mg2/engine speeds based on the current speed and wanted speed using the regression equation from [data_analysis.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_analysis.py), then packages these speeds and sends them to the ev3. After the payload is sent, the ev3 applies these angular velocities to the motors. There's also a relatively accurate battery depletion model built in (I’m currently unaware of actual battery dynamics in Toyotas, which likely vary by model), where the engine has to turn on to charge the "battery" after it gets to ~25%. Lastly, a sport/normal/eco mode selection and a drive gear shifter: r + n + d was added for added realism.
 
- - data_analysis.py: This code file takes the results from data_farm_1.py and data_farm_2.py and uses numpy’s least squares algorithm (lstsq()) to establish a plane equation between mg1, mg2, and the engine. R^2 of 99.7. 
+ - data_analysis.py: This code file takes the results from data_farm_1.py and data_farm_2.py and uses numpy’s least squares algorithm (lstsq()) to establish a plane equation between mg1, mg2, and the engine. R^2 of 0.997. 
 
  - data_farm_1.py and data_farm_2.py: These code files control the speeds of two motors and to see the resulting speed of the third, collecting angular velocity data of all three and storing them. [CSV of data](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/eCVT%20spreadsheet%20-%20Sheet%201.csv).
 
@@ -38,7 +83,7 @@ Model of Toyota’s hybrid transmission, known as the eCVT (electronic continuou
  - laptopside.py: battery model isn't accurate
  - data_farm_2.py: include all methods to get data
 
-### Newest updates:
+### Newest updates
  - Fixed clicking issue with mechanism, by improving ring connector and separating parts. 
  - ev3controller.py introduced
  - laptopside.py acceleration issue has been fixed by using ev3controller.py
