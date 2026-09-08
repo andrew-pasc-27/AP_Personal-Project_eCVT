@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import socket
 import time
 from ev3dev2.motor import LargeMotor, MediumMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, SpeedPercent, SpeedDPS
 from ev3dev2.display import Display
@@ -7,7 +8,16 @@ from ev3dev2.sensor import INPUT_4
 from ev3dev2.button import Button
 from ev3dev2.power import PowerSupply
 
-#ev3 standalone code file, used recommendations to make code more readable, so i used constants and tried to use more obvious names
+#connect to my laptop, use a blank IP address to listen for any incoming connections, 9999 is the "password"
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(("0.0.0.0", 9998))
+server.listen(1)
+print("listening")
+
+#connection (which is a new server) and address sent after the connection is established, conn sends/receives data, addr is computer address 
+conn, addr = server.accept()
+conn.settimeout(1.5)
+print("connected")
 
 JOYSTICK_CENTER = 47 #value of reflected intensity at joystick middle
 OFFSET = 2 #deadzone because joystick has play
@@ -25,7 +35,6 @@ LOW_BATTERY_VOLTAGE = 6.5
 BATTERY_CHECK_INTERVAL = 3.0
 HYBRID_BATTERY_START = 100.0
 HYBRID_BATTERY_ASSIST_LEVEL = 25.0
-
 batt = PowerSupply()
 btn = Button() #d-pad on the ev3
 lcd = Display()
@@ -44,11 +53,10 @@ def target_speed_from_joystick():
         on = True if drive_fraction>MG2_POWER_LIMIT else False #should engine be on
         return max((drive_fraction ** THROTTLE_CURVE) * SPEED_MULTIPLIER, 1.0), on
     elif value < JOYSTICK_CENTER - OFFSET:
-        reverse_fraction = min(1.0, (JOYSTICK_CENTER - value)/54) 
+        reverse_fraction = min(1.0, (JOYSTICK_CENTER - value)/54)
         return -max((reverse_fraction ** THROTTLE_CURVE) * SPEED_MULTIPLIER * 5, 1.0), False #engine not on in reverse, backwards should be faster
     else:
         return 0.0, False #when joystick @ center
-
 
 def calculate_motor_speeds(current_speed, speed_adder, engine_on_fast):
     global hybrid_battery
@@ -86,7 +94,6 @@ def calculate_motor_speeds(current_speed, speed_adder, engine_on_fast):
 
     return mg1, target_engine, mg2
 
-
 def set_motor_speeds(mg1, engine, mg2): #just put it in a function ig
     motor_a.on(SpeedDPS(mg1))
     motor_b.on(SpeedDPS(engine))
@@ -106,12 +113,12 @@ def update_display(message = None):
 
 def check_battery():
     global battery_low
-    battery_low = True if batt.measured_volts< LOW_BATTERY_VOLTAGE else False
+    battery_low = True if batt.measured_volts < LOW_BATTERY_VOLTAGE else False
     return battery_low
 
 def is_button_pressed(): #when a button on d-pad is pressed
     global current_gear
-    if btn.right or btn.left:
+    if btn.right:
         set_motor_speeds(0,0,0) #emergency brake
         update_display("BRAKE")
         return 0
@@ -132,9 +139,10 @@ def regen(): #it was getting too long and i didn't like copy/pasting
         set_motor_speeds(mg1, target_engine, mg2)
         current_speed += delta
         hybrid_battery = min(HYBRID_BATTERY_START,
-                     hybrid_battery + (5.0 / SPEED_MULTIPLIER * abs(current_speed) / 1000.0))
+                 hybrid_battery + (5.0 / SPEED_MULTIPLIER * abs(current_speed) / 1000.0))
+        send((""+str(mg1)+","+str(target_engine)+","+str(mg2)+"\n"))
     else: 
-        pass
+        send("0.0,0.0,0.0\n")
 
 def lets_go(i): #lets go as in the thing is going to go; let's do this!
     global current_speed
@@ -153,26 +161,30 @@ def lets_go(i): #lets go as in the thing is going to go; let's do this!
         mg1, engine, mg2 = calculate_motor_speeds(current_speed, speed_adder, fast_engine)
         set_motor_speeds(mg1, engine, mg2)
         current_speed += speed_adder 
+        send((""+str(mg1)+","+str(engine)+","+str(mg2)+"\n"))
 
-
-current_speed = 0.0 #always start at 0
-current_gear = 1 #start in neutral
-battery_low = False
-hybrid_battery = HYBRID_BATTERY_START
-frame_count = 0
-next_loop = time.time()
+def send(inp):
+    if conn:
+        try:
+            conn.send(str(inp).encode())
+        except:
+            pass
 
 try:
-    while True: #isn't this such an elegant while loop
+    current_speed = 0.0 #always start at 0
+    current_gear = 1 #start in neutral
+    battery_low = False
+    hybrid_battery = HYBRID_BATTERY_START
+    frame_count = 0
+    next_loop = time.time()
+    while True:
         next_loop += TIME_STEP
         if is_button_pressed():
-            if current_gear == 1: #neutral
+            if current_gear == 1:
                 regen()
-
-            elif current_gear == 0: #drive
+            elif current_gear == 0:
                 lets_go(0)
-                
-            elif current_gear == 2: #reverse
+            elif current_gear == 2:
                 lets_go(2)
         else:
             current_speed = 0.0
@@ -180,14 +192,13 @@ try:
         if frame_count % 30 == 0:
             check_battery()
 
-        if frame_count % 2 ==0:
+        if frame_count % 2 == 0:
             update_display()
-        frame_count +=1
+        frame_count += 1
         time_remaining = next_loop - time.time()
-        if (time_remaining)>0:
+        if time_remaining > 0:
             time.sleep(time_remaining)
-
-
+        
 except KeyboardInterrupt: #i can back out with my keyboard or with the button on the ev3 so the while loop can be backed out of
     print("done")
 finally:
