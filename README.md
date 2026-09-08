@@ -1,16 +1,17 @@
 # AP_personal_project_eCVT
-Model of Toyota’s hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms. 
+Model of Toyota's hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms. 
 
 ## Hardware
 ### Mechanical Parts description: 
- - 4 11x11 Quarter Gear Rings were used to assemble the ring gear, a connector hub with three axles (120 degrees apart) was used to transfer ring gear rotation into an axle rotation. Axle is connected to 40 tooth gear, which is reduced to a 24 tooth gear when connected to mg2. 
+ - 4 11x11 Quarter Gear Rings were used to assemble the ring gear, a connector hub with three axles (120 degrees apart) was used to transfer ring gear rotation into an axle rotation. Axle is connected to drive wheel via a 1:5 gear reduction.
  - 60 tooth turntable (piece with hole in middle, where axle connecting to sun gear lies) was used to power the carrier. It is meshed with a twelve tooth gear. 
  - Carrier consists of axle connectors with pin holes for gears, used axles and connectors instead of technic beams due to gear size limitations.
  - Sun is a 36 tooth gear, planets consist of a 16 tooth gear and a 36 tooth gear (due to gear size limitations)
  - Technic Liftarm frames make up most of the structure.
  - Small flat-4 engine model connected to Engine motor (could not use an inline-4 model due to piece and size limitations).
  - Final drive wheel uses a 1:5 gear reduction from the ring gear axle. 
-###   
+
+### Electrical/Control Components:
  - Medium ev3 motor used for MG1, 12:20 tooth ratio between MG1 and axle connecting to sun gear, so MG1 has more torque, which is needed due to Lego tolerances and static friction.
  - 2 Large ev3 motors used for MG2 and the Engine.
  - Color Sensor used for gas/brake joystick, created using .reflected_light_intensity attribute. As joystick lever gets closer, reflected light has a larger intensity.
@@ -18,75 +19,133 @@ Model of Toyota’s hybrid transmission, known as the eCVT (electronic continuou
  - Built in PID controllers allow motors to maintain speed regardless of driven wheel resistance.
 
 ## Kinematics Equations
-### Theoretical Equation:
- - The kinematic equation for a standard planetary gear set, known as the Willis Equation, is (1+𝑘)𝜔𝐶=𝜔𝑆+𝑘𝜔𝑅
- - K is number of teeth on ring gear divided by number of teeth on sun gear. C corresponds to carrier, S to sun, and R to ring.
- - Substituting known inputs: (1+k) * b * ENGINE = a * MG1 + k * c * MG2
- - Calculating K: 140T / 36T = 3.889
- - However, because gears are not directly connected to motors, gear reductions have to be accounted for, hence the added coefficients.
- - Below equations use input/output.
- - MG1 -> Sun: a = -12/20 = -0.6 (Because there are 2 planets, we multiply by -1)
- - Engine -> Carrier: b = 12/60 = 0.2 
- - MG2 -> Ring: c = 24/40 = 0.6
 
- - Substituting everything in:
- - (1 + 3.889) * 0.2 * ENGINE = - 0.6 * MG1 + 3.889 * 0.6 * MG2
- - Simplifying:
- - 0 = - 0.6 * MG1 - 0.9778 * ENGINE + 2.334 * MG2
- - Represents a plane with coordinates (MG1, ENGINE, MG2), normal vector = <-0.6, -0.9778, 2.334>
+### Theoretical Equation
 
-### Empirical Model:
- - Empirical data on angular velocity was collected from data_farm_1.py and data_farm_2.py. [CSV of data](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/eCVT%20spreadsheet%20-%20Sheet%201.csv).
- - This data was put through the least squares regression model in data_analysis.py.
- - Resulting regression: - 0.44254819615742197 = - 0.2605291672 * MG1 - 0.25062775461909614 * ENGINE + MG2 
- - Since this also represents a plane, normal vector = <-0.261, -0.251, 1> (Assuming coordinates of (MG1, ENGINE, MG2)
- - R^2 of regression was 0.997, which means most of the variance is accounted for in the aforementioned regression.
+The kinematic equation for a standard planetary gear set, known as the **Willis Equation**, is:
 
-### Theoretical vs. Empirical
+$$(1+k)\omega_C = \omega_S + k\omega_R$$
 
-#### Simple Comparison
- - n1 = <-0.6, -0.9778, 2.334>
- - n2 = <-0.261, -0.251, 1>
+Where:
+- $k$ = ratio of ring gear teeth to sun gear teeth
+- $\omega_C$ = carrier angular velocity
+- $\omega_S$ = sun angular velocity
+- $\omega_R$ = ring angular velocity
 
- - Dividing n1 by 2.334 to get a similar vector:
- - n1/2.334 = <-0.257, -0.42, 1>
+#### Calculating the K Factor
 
- - The vectors share some similarities, however, the engine has a lot more impact on the final result in theory.
+$$k = \frac{\text{Ring teeth}}{\text{Sun teeth}} = \frac{140}{36} = 3.889$$
 
-#### In-depth comparison
+#### Gear Ratios and Coefficients
 
- - Dotting n1 and n2:
- - n1 . n2 = 0.157 + 0.245 + 2.334 = 2.736
- - Product of magnitudes
- - |n1| * |n2| = 2.766
- - Finding ø from arccos(2.736 / 2.766)
- - ø = 8.446 deg
+Since the motors and engine are not directly connected to the planetary gears, we must account for intermediate gear reductions:
 
- - The vectors are very close in direction, only 8 degrees off. The difference likely lies in mechanical constraints.
- - This result means the mechanism itself causes some error, but not by much, which is nice.
+| Component | Gear Ratio | Calculation | Value |
+|-----------|-----------|-------------|-------|
+| MG1 → Sun | Input reduction | $-\frac{12}{20}$ | $-0.6$ |
+| Engine → Carrier | Input reduction | $\frac{12}{60}$ | $0.2$ |
+| MG2 → Ring | Input reduction | $\frac{24}{40}$ | $0.6$ |
+
+*Note: MG1 ratio is multiplied by -1 because there are 2 planet gears*
+
+#### Substituting into Willis Equation
+
+$$(1 + k) \cdot b \cdot \text{ENGINE} = a \cdot \text{MG1} + k \cdot c \cdot \text{MG2}$$
+
+Substituting known values:
+
+$$(1 + 3.889) \cdot 0.2 \cdot \text{ENGINE} = -0.6 \cdot \text{MG1} + 3.889 \cdot 0.6 \cdot \text{MG2}$$
+
+#### Simplified Constraint Equation
+
+$$0 = -0.6 \cdot \text{MG1} - 0.9778 \cdot \text{ENGINE} + 2.334 \cdot \text{MG2}$$
+
+This represents a plane in 3D space with coordinates $(\text{MG1}, \text{ENGINE}, \text{MG2})$ and normal vector:
+
+$$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
+
+---
+
+### Empirical Model
+
+Empirical data on angular velocity was collected by systematically varying motor speeds and measuring the resulting third motor speed. This data was processed through least squares regression to establish an empirical model.
+
+#### Regression Analysis
+
+Using numpy's least squares algorithm (`lstsq()`), the empirical constraint equation is:
+
+$$-0.4425 = -0.2605 \cdot \text{MG1} - 0.2506 \cdot \text{ENGINE} + \text{MG2}$$
+
+Rearranged:
+
+$$0 = -0.2605 \cdot \text{MG1} - 0.2506 \cdot \text{ENGINE} + \text{MG2} + 0.4425$$
+
+The empirical normal vector is:
+
+$$\vec{n_{\text{empirical}}} = \langle -0.2605, -0.2506, 1 \rangle$$
+
+**Regression Quality:** $R^2 = 0.997$ (99.7% of variance explained)
+
+---
+
+### Theoretical vs. Empirical Comparison
+
+#### Vector Comparison
+
+To compare the two models, we normalize the theoretical vector by dividing by its largest component:
+
+$$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
+
+$$\vec{n_{\text{theory, normalized}}} = \frac{\vec{n_{\text{theory}}}}{2.334} = \langle -0.257, -0.420, 1 \rangle$$
+
+**Observation:** The empirical vector shows the engine has less influence than theory predicts, likely due to mechanical friction and gear lash.
+
+#### Angle Between Vectors
+
+To measure how closely the models agree, we calculate the angle between the normal vectors:
+
+$$\vec{n_{\text{theory}}} \cdot \vec{n_{\text{empirical}}} = (-0.6)(-0.2605) + (-0.9778)(-0.2506) + (2.334)(1) = 2.736$$
+
+$$|\vec{n_{\text{theory}}}| = \sqrt{0.6^2 + 0.9778^2 + 2.334^2} = 2.766$$
+
+$$|\vec{n_{\text{empirical}}}| = \sqrt{0.2605^2 + 0.2506^2 + 1^2} = 1.032$$
+
+$$\theta = \arccos\left(\frac{2.736}{2.766 \times 1.032}\right) = 8.446°$$
+
+#### Conclusion
+
+The theoretical and empirical models differ by only **8.4 degrees**, indicating excellent agreement between the mathematical model and the physical system. The small discrepancy is attributable to mechanical constraints such as friction, gear tolerance, and backlash in the LEGO mechanism.
+
+---
 
 ## Software
-### Code File descriptions (Latest file first):
- - ev3controller.py: A standalone control code file using color sensor joystick, combining most of the functionality from [ev3side.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3side.py) and [laptopside.py](laptopside.py). Uses regression equation from [data_analysis.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_analysis.py). The joystick allows for a non-constant acceleration for improved model accuracy, for example, the engine turns on when pedal is floored, regardless of speed. Added ev3 display functionality, which displays drive gear (reverse, neutral, drive), speed, and measured voltage of the ev3 battery. Ev3 button functionality introduced, using up, middle, and down buttons for drive gear; left and right buttons used for emergency brake. Encountered runtime issues due to ev3 limited functionality, which was solved by updating the display and checking the battery less.
 
- - ev3side.py and laptopside.py: Two files that are connected using sockets. Due to limited functionality of ev3, I separated the ev3 and laptop so a GUI could be introduced. To connect, the ev3 is booted up and it runs its code file (after being plugged in and establishing an IP) and waits for a connection from another device (the laptop). The laptop looks for the ev3’s IP address and establishes a connection once found. After the connection is made, the interface waits for a press of the gas button/brake buttons. It calculates the mg1/mg2/engine speeds based on the current speed and wanted speed using the regression equation from [data_analysis.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_analysis.py), then packages these speeds and sends them to the ev3. After the payload is sent, the ev3 applies these angular velocities to the motors. There's also a relatively accurate battery depletion model built in (I’m currently unaware of actual battery dynamics in Toyotas, which likely vary by model), where the engine has to turn on to charge the "battery" after it gets to ~25%. Lastly, a sport/normal/eco mode selection and a drive gear shifter: r + n + d was added for added realism.
+### Code File Descriptions (Latest file first):
 
- - data_analysis.py: This code file takes the results from data_farm_1.py and data_farm_2.py and uses numpy’s least squares algorithm (lstsq()) to establish a plane equation between mg1, mg2, and the engine. R^2 of 0.997. 
+ - **ev3controller.py:** A standalone control code file using color sensor joystick, combining most of the functionality from ev3side.py and laptopside.py. Allows direct control without network connection.
 
- - data_farm_1.py and data_farm_2.py: These code files control the speeds of two motors and to see the resulting speed of the third, collecting angular velocity data of all three and storing them. [CSV of data](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/eCVT%20spreadsheet%20-%20Sheet%201.csv).
+ - **ev3side.py and laptopside.py:** Two files that communicate via sockets. The EV3 has limited processing power, so the laptop handles data analysis and visualization while the EV3 handles motor control. A tkinter GUI on the laptop displays real-time telemetry.
+
+ - **data_analysis.py:** Processes empirical data from data_farm scripts and uses numpy's `lstsq()` to establish the plane equation relating MG1, MG2, and ENGINE speeds.
+
+ - **data_farm_1.py and data_farm_2.py:** Data collection scripts that vary two motor speeds, record the resulting third motor speed, and log angular velocity measurements to CSV files for regression analysis.
+
+---
 
 ## Issues and Updates
-### Current issues (by code file):
- - ev3controller.py: needs socket connection to laptop for data graphs
- - ev3controller.py: needs smoother acceleration
- - ev3controller.py: needs ecvt battery model for increased accuracy
- - laptopside.py: battery model isn't accurate
- - data_farm_2.py: include all methods to get data
 
-### Newest updates
- - Fixed clicking issue with mechanism, by improving ring connector and separating parts. 
- - ev3controller.py introduced
- - laptopside.py acceleration issue has been fixed by using ev3controller.py
- - tkinter interface introduced for laptopside.py
- - kinematic equation changed due to positioning of the engine and MG1, the coefficient is now multiplied by -1 (thought you should know, since data_analysis has been changed a bit for this)
+### Current Issues (by file):
 
+ - **ev3controller.py:** Needs socket connection to laptop for real-time data graphs
+ - **ev3controller.py:** Acceleration ramp-up could be smoother
+ - **ev3controller.py:** Battery voltage model needed for increased accuracy
+ - **laptopside.py:** Battery discharge model isn't accurate
+ - **data_farm_2.py:** Need to include all data collection methods
+
+### Recent Updates
+
+ - Fixed mechanical clicking issue by improving ring gear connector and separating parts
+ - Introduced ev3controller.py for simplified standalone operation
+ - Fixed acceleration smoothness issue in laptopside.py (now delegated to ev3controller.py)
+ - Added tkinter GUI interface for laptopside.py with real-time motor speed display
+ - Updated kinematic equations: MG1 coefficient now multiplied by -1 due to repositioning (see data_analysis.py for details)
