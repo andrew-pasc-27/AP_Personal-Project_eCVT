@@ -1,39 +1,44 @@
 # AP_personal_project_eCVT
 Personal Project recreating ecvt from LEGO Mindstorms. 
 
-Disclaimers:
- - this is a model of Toyota’s ecvt, so variable names correspond to ecvt parts (mg1, engine, mg2).
- - Mg1 uses a medium ev3 motor, while the engine and mg2 use large motors
- - ev3dev-stretch was used to make the ev3 support python.
- - All speeds are in w, or angular velocity, which makes data nice and consistent and also matches well with online planetary gear set equations.
 
-Current issues (by code file):
+Model of Toyota’s hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms. 
+
+Parts description: 
+ - 4 11x11 Quarter Gear Rings were used to assemble the ring gear, a connector hub with three axles (120 degrees apart) was used to transfer ring gear rotation into an axle rotation. Axle is connected to 40 tooth gear, which is reduced to a 24 tooth gear when connected to mg2. 
+ - 60 tooth turntable (piece with hole in middle, where axle connecting to sun gear lies) was used to power the carrier. It is meshed with a twelve tooth gear. 
+ - Carrier consists of axle connectors with pin holes for gears, used axles and connectors instead of technic beams due to gear size limitations.
+ - Sun is a 36 tooth gear, planets consist of a 16 tooth gear and a 36 tooth gear (due to gear size limitations)
+ - Technic Liftarm frames make up most of the structure.
+ - Small flat-4 engine model connected to Engine motor (could not use an inline-4 model due to piece and size limitations).
+ - Final drive wheel uses a 1:5 gear reduction from the ring gear axle. 
+  
+ - Medium ev3 motor used for MG1, 12:20 tooth ratio between MG1 and axle connecting to sun gear, so MG1 has more torque, which is needed due to Lego tolerances and static friction.
+ - 2 Large ev3 motors used for MG2 and the Engine.
+ - Color Sensor used for gas/brake joystick, created using .reflected_light_intensity attribute. As joystick lever gets closer, reflected light has a larger intensity.
+ - Mindstorms ev3 brick used with a flashed SD card that holds an [ev3dev-stretch boot image](https://www.ev3dev.org/downloads/).
+ - Built in PID controllers allow motors to maintain speed regardless of driven wheel resistance.
+
+Code File descriptions (Latest file first):
+ - ev3controller.py: A standalone control code file using color sensor joystick, combining most of the functionality from [ev3side.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3side.py) and [laptopside.py]([url](laptopside.py)). Uses regression equation from [data_analysis.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_analysis.py). The joystick allows for a non-constant acceleration for improved model accuracy, for example, the engine turns on when pedal is floored, regardless of speed. Added ev3 display functionality, which displays drive gear (reverse, neutral, drive), speed, and measured voltage of the ev3 battery. Ev3 button functionality introduced, using up, middle, and down buttons for drive gear; left and right buttons used for emergency brake. Encountered runtime issues due to ev3 limited functionality, which was solved by updating the display and checking the battery less.
+
+ - ev3side.py and laptopside.py: Two files that are connected using sockets. Due to limited functionality of ev3, I separated the ev3 and laptop so a GUI could be introduced. To connect, the ev3 is booted up and it runs its code file (after being plugged in and establishing an IP) and waits for a connection from another device (the laptop). The laptop looks for the ev3’s IP address and establishes a connection once found. After the connection is made, the interface waits for a press of the gas button/brake buttons. It calculates the mg1/mg2/engine speeds based on the current speed and wanted speed using the regression equation from [data_analysis.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_analysis.py), then packages these speeds and sends them to the ev3. After the payload is sent, the ev3 applies these angular velocities to the motors. There's also a relatively accurate battery depletion model built in (I’m currently unaware of actual battery dynamics in Toyotas, which likely vary by model), where the engine has to turn on to charge the "battery" after it gets to ~25%. Lastly, a sport/normal/eco mode selection and a drive gear shifter: r + n + d was added for added realism.
+
+ - data_analysis.py: This code file takes the results from data_farm_1.py and data_farm_2.py and uses numpy’s least squares algorithm (lstsq()) to establish a plane equation between mg1, mg2, and the engine. R^2 of 99.7. 
+
+ - data_farm_1.py and data_farm_2.py: These code files control the speeds of two motors and to see the resulting speed of the third, collecting angular velocity data of all three and storing them. [CSV of data](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/eCVT%20spreadsheet%20-%20Sheet%201.csv).
+
+ Current issues (by code file):
  - ev3controller.py: needs socket connection to laptop for data graphs
- - ev3controller.py: needs smoother acceleration/more believable acceleration
+ - ev3controller.py: needs smoother acceleration
  - ev3controller.py: needs ecvt battery model for increased accuracy
- - laptopside.py: battery model isn't really accurate, acceleration is still constant (therefore it kinda sucks)
- - data_farm_2.py: I didn't include all the ways I got data so the numbers I got might be confusing
+ - laptopside.py: battery model isn't accurate
+ - data_farm_2.py: include all methods to get data
 
 Newest updates:
- - fixed clicking issue with mechanism, pretty smooth 😁
- - ev3controller.py introduced, check description below
- - laptopside.py acceleration issue has been fixed by using ev3controller.py (pro tip: if there's a problem just make a new thing to avoid it)
+ - Fixed clicking issue with mechanism, by improving ring connector and separating parts. 
+ - ev3controller.py introduced
+ - laptopside.py acceleration issue has been fixed by using ev3controller.py
  - tkinter interface introduced for laptopside.py
- - kinematic equation changed due to positioning of the engine, the coefficient is now multiplied by -1 (thought you should know, since data_analysis has been changed a bit for this)
+ - kinematic equation changed due to positioning of the engine and MG1, the coefficient is now multiplied by -1 (thought you should know, since data_analysis has been changed a bit for this)
 
-
-Code file descriptions (latest file first):
- - ev3controller.py (I really need more creative names 🙃): A standalone control code file (FINALLY NO LAPTOP!). A color sensor was used to create a forward/back joystick using built in .reflected_light_intensity attribute. It returns a value from 0-100, and right now 47 is the middle value (higher than 47 accelerates, less than decelerates). It's pretty accurate, and a nice fix because acceleration isn't constant, and I can calculate when the engine should turn on (unlike laptopside.py). Also, the speed, battery percentage of ev3, and drive gear are displayed on the ev3 itself. The code file looks much nicer compared to other ones because I was advised to keep constants defined at the top and functionally abstract any repeated parts so the code's easier to understand and read. Surprisingly, making it and debugging it was a lot easier because even I could read it better (noted for future). I also used a try/except/finally, which is a first (I've never used finally before, thought I might as well try). 
-
- - ev3side.py and laptopside.py: Two files. One goal. (wow was that motivating or what) Anyway, because ev3dev2 is limited to basic libraries, any attempt at making a GUI or even using numpy (check out data_analysis.py) was a fat no (It won't even use f-strings 😭). So, I had to separate the laptop and ev3 so I could introduce some higher level libraries. The ev3 and laptop are connected using sockets, essentially the ev3 is booted up and it runs its code file (after being plugged in and establishing an IP) and waits for a connection from another device (the laptop). The laptop looks for the ev3’s IP address and establishes a connection once found. After that, laptopside.py's GUI (super cool interface btw) waits for a press of the gas button/brake buttons. It calculates the mg1/mg2/engine speeds based on the current speed and wanted speed, then packages them and sends them to the ev3. Pretty cool. After the payload is sent, the ev3 just runs it. There's also a somewhat accurate (not really) battery depletion model in it, where the engine has to turn on to charge the "battery" after it gets to ~25%. Lastly, a sport/normal/eco mode selection and a drive gear shifter: r + n + d (no park because it doesn't really move) was added for coolness.
-
- - data analysis uses numpy’s least squares algorithm (lstsq()) to establish a relationship between each speed, so mg1, engine, and mg2. Its result is then copy-and-pasted into laptopside.py
-
- - data farms 1 and 2 both run tests on my ecvt, collecting data on each 3 motors speed in order to establish a relationship
-  
-
-
-
-
-
- 
