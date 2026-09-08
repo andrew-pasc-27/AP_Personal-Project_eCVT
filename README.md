@@ -24,7 +24,7 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 
 The kinematic equation for a standard planetary gear set, known as the **Willis Equation**, is:
 
-‘$$(1+k)\omega_C = \omega_S + k\omega_R$$’
+$$(1+k)\omega_C = \omega_S + k\omega_R$$
 
 Where:
 - $k$ = ratio of ring gear teeth to sun gear teeth
@@ -34,7 +34,7 @@ Where:
 
 #### Calculating the K Factor
 
-‘$$k = \frac{\text{Ring teeth}}{\text{Sun teeth}} = \frac{140}{36} = 3.889$$’
+$$k = \frac{\text{Ring teeth}}{\text{Sun teeth}} = \frac{140}{36} = 3.889$$
 
 #### Gear Ratios and Coefficients
 
@@ -50,19 +50,19 @@ Since the motors and engine are not directly connected to the planetary gears, w
 
 #### Substituting into Willis Equation
 
-‘$$(1 + k) \cdot b \cdot \text{ENGINE} = a \cdot \text{MG1} + k \cdot c \cdot \text{MG2}$$’
+$$(1 + k) \cdot b \cdot \text{ENGINE} = a \cdot \text{MG1} + k \cdot c \cdot \text{MG2}$$
 
 Substituting known values:
 
-‘$$(1 + 3.889) \cdot 0.2 \cdot \text{ENGINE} = -0.6 \cdot \text{MG1} + 3.889 \cdot 0.6 \cdot \text{MG2}$$’
+$$(1 + 3.889) \cdot 0.2 \cdot \text{ENGINE} = -0.6 \cdot \text{MG1} + 3.889 \cdot 0.6 \cdot \text{MG2}$$
 
 #### Simplified Constraint Equation
 
-‘$$0 = -0.6 \cdot \text{MG1} - 0.9778 \cdot \text{ENGINE} + 2.334 \cdot \text{MG2}$$’
+$$0 = -0.6 \cdot \text{MG1} - 0.9778 \cdot \text{ENGINE} + 2.334 \cdot \text{MG2}$$
 
 This represents a plane in 3D space with coordinates $(\text{MG1}, \text{ENGINE}, \text{MG2})$ and normal vector:
 
-‘$$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$’
+$$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
 
 ---
 
@@ -74,15 +74,15 @@ Empirical data on angular velocity was collected by systematically varying motor
 
 Using numpy's least squares algorithm (`lstsq()`), the empirical constraint equation is:
 
-‘$$-0.4425 = -0.2605 \cdot \text{MG1} - 0.2506 \cdot \text{ENGINE} + \text{MG2}$$’
+$$-0.4425 = -0.2605 \cdot \text{MG1} - 0.2506 \cdot \text{ENGINE} + \text{MG2}$$
 
 Rearranged:
 
-‘$$0 = -0.2605 \cdot \text{MG1} - 0.2506 \cdot \text{ENGINE} + \text{MG2} + 0.4425$$’
+$$0 = -0.2605 \cdot \text{MG1} - 0.2506 \cdot \text{ENGINE} + \text{MG2} + 0.4425$$
 
 The empirical normal vector is:
 
-‘$$\vec{n_{\text{empirical}}} = \langle -0.2605, -0.2506, 1 \rangle$$’
+$$\vec{n_{\text{empirical}}} = \langle -0.2605, -0.2506, 1 \rangle$$
 
 **Regression Quality:** $R^2 = 0.997$ (99.7% of variance explained)
 
@@ -94,9 +94,9 @@ The empirical normal vector is:
 
 To compare the two models, we normalize the theoretical vector by dividing by its largest component:
 
-’$$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$’
+$$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
 
-‘$$\vec{n_{\text{theory, normalized}}} = \frac{\vec{n_{\text{theory}}}}{2.334} = \langle -0.257, -0.420, 1 \rangle$$’
+$$\vec{n_{\text{theory, normalized}}} = \frac{\vec{n_{\text{theory}}}}{2.334} = \langle -0.257, -0.420, 1 \rangle$$
 
 **Observation:** The empirical vector shows the engine has less influence than theory predicts, likely due to mechanical friction and gear lash.
 
@@ -104,13 +104,13 @@ To compare the two models, we normalize the theoretical vector by dividing by it
 
 To measure how closely the models agree, we calculate the angle between the normal vectors:
 
-’$$\vec{n_{\text{theory}}} \cdot \vec{n_{\text{empirical}}} = (-0.6)(-0.2605) + (-0.9778)(-0.2506) + (2.334)(1) = 2.736$$’
+$$\vec{n_{\text{theory}}} \cdot \vec{n_{\text{empirical}}} = (-0.6)(-0.2605) + (-0.9778)(-0.2506) + (2.334)(1) = 2.736$$
 
-‘$$|\vec{n_{\text{theory}}}| = \sqrt{0.6^2 + 0.9778^2 + 2.334^2} = 2.766$$’
+$$|\vec{n_{\text{theory}}}| = \sqrt{0.6^2 + 0.9778^2 + 2.334^2} = 2.766$$
 
-’$$|\vec{n_{\text{empirical}}}| = \sqrt{0.2605^2 + 0.2506^2 + 1^2} = 1.032$$’
+$$|\vec{n_{\text{empirical}}}| = \sqrt{0.2605^2 + 0.2506^2 + 1^2} = 1.032$$
 
-‘$$\theta = \arccos\left(\frac{2.736}{2.766 \times 1.032}\right) = 8.446°$$’
+$$\theta = \arccos\left(\frac{2.736}{2.766 \times 1.032}\right) = 8.446°$$
 
 #### Conclusion
 
