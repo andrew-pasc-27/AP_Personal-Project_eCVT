@@ -1,6 +1,13 @@
 # AP_personal_project_eCVT
 Model of Toyota's hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms. 
 
+
+## Contents
+ - [Hardware](#hardware)
+ - [Kinematics Equations](#kinematics-equations)
+ - [Software](#software)
+ - [Updates](#updates)
+
 ## Hardware
 ### Mechanical Parts description: 
  - 4 11x11 Quarter Gear Rings were used to assemble the ring gear, a connector hub with three axles (120 degrees apart) was used to transfer ring gear rotation into an axle rotation. Axle is connected to drive wheel via a 1:5 gear reduction.
@@ -19,10 +26,13 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
  - Built in PID controllers allow motors to maintain speed regardless of driven wheel resistance.
 
 ## Kinematics Equations
+ - [The Theoretical Equation](#simplified-constraint-equation)
+ - [The Empirical Equation](#regression-analysis)
+ - [Comparison](#conclusion)
 
-### Theoretical Equation
+### Finding Theoretical Equation
 
-The kinematic equation for a standard planetary gear set, known as the **Willis Equation**, is:
+The kinematic equation for a standard planetary (epicyclic) gear set, known as the **Willis Equation**, is:
 
 $$(1+k)\omega_C = \omega_S + k\omega_R$$
 
@@ -68,7 +78,7 @@ $$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
 
 ### Empirical Model
 
-Empirical data on angular velocity was collected by systematically varying motor speeds and measuring the resulting third motor speed. This data was processed through least squares regression to establish an empirical model.
+Empirical data on angular velocity was collected by systematically varying motor speeds and measuring the third motor speed. This data was processed through least squares regression to establish an empirical model.
 
 #### Regression Analysis
 
@@ -122,25 +132,25 @@ The theoretical and empirical models differ by only **8.4 degrees**, indicating 
 
 ### Code File Descriptions (Latest file first):
 
- - **ev3controller.py:** A standalone control code file using color sensor joystick, combining most of the functionality from ev3side.py and laptopside.py. Allows direct control without network connection.
+ - **[ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py):** A standalone control code file using color sensor joystick, combining most of the functionality from ev3side.py and laptopside.py. Allows direct control without network connection.
 
- - **ev3side.py and laptopside.py:** Two files that communicate via sockets. The EV3 has limited processing power, so the laptop handles data analysis and visualization while the EV3 handles motor control. A tkinter GUI on the laptop displays real-time telemetry.
+ - **[ev3side.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3side.py) and [laptopside.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptopside.py):** Two files that communicate via sockets. The EV3 has limited processing power, so the laptop handles data analysis and visualization while the EV3 handles motor control. A tkinter GUI on the laptop displays real-time telemetry.
 
- - **data_analysis.py:** Processes empirical data from data_farm scripts and uses numpy's `lstsq()` to establish the plane equation relating MG1, MG2, and ENGINE speeds.
+ - **[data_analysis.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_analysis.py):** Processes empirical data from data_farm scripts and uses numpy's `lstsq()` to establish the plane equation relating MG1, MG2, and ENGINE speeds.
 
- - **data_farm_1.py and data_farm_2.py:** Data collection scripts that vary two motor speeds, record the resulting third motor speed, and log angular velocity measurements to CSV files for regression analysis.
+ - **[data_farm_1.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_farm_1.py) and [data_farm_2.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_farm_2.py):** Data collection scripts that vary two motor speeds, record the resulting third motor speed, and log angular velocity measurements to CSV files for regression analysis.
 
 ---
 
-## Issues and Updates
+## Updates
 
-### Current Issues (by file):
+### Future Updates (by file):
 
- - **ev3controller.py:** Needs socket connection to laptop for real-time data graphs
- - **ev3controller.py:** Acceleration ramp-up could be smoother
- - **ev3controller.py:** Battery voltage model needed for increased accuracy
- - **laptopside.py:** Battery discharge model isn't accurate
- - **data_farm_2.py:** Need to include all data collection methods
+ - **[ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py):** Needs socket connection to laptop for real-time data graphs
+ - **[ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py):** Acceleration model could be smoother/more accurate.
+ - **[ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py):** Battery discharge model needed for increased accuracy
+ - **[laptopside.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptopside.py):** Battery discharge model isn't accurate
+ - **[data_farm_2.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_farm_2.py):** Need to include all data collection methods
 
 ### Recent Updates
 
