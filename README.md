@@ -30,7 +30,7 @@ Model of Toyota’s hybrid transmission, known as the eCVT (electronic continuou
  - MG2 -> Ring: c = 24/40 = 0.6
 
  - Substituting everything in:
- - (1 + 3.889) * 0.2 * ENGINE = 0.6 * MG1 + 3.889 * 0.6 * MG2
+ - (1 + 3.889) * 0.2 * ENGINE = - 0.6 * MG1 + 3.889 * 0.6 * MG2
  - Simplifying:
  - 0 = - 0.6 * MG1 - 0.9778 * ENGINE + 2.334 * MG2
  - Represents a plane with coordinates (MG1, ENGINE, MG2), normal vector = <-0.6, -0.9778, 2.334>
