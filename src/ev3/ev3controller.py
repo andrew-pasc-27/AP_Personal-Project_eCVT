@@ -101,7 +101,7 @@ def update_display(message = None):
         lcd.text_pixels("LOW BATTERY", x=34, y=2,font="helvB12", clear_screen=True)
     else:
         lcd.draw.rectangle((0, 0, 178, 128), fill='white') #so the whole screen doesnt have to be replaced
-        lcd.text_pixels(gear_names[current_gear][0] + ", "+str(round(hybrid_battery),1)+"\n" + str(round(current_speed / 15, 1)) + "MPH", x=60, y=24,font="helvB24", clear_screen=False)
+        lcd.text_pixels(gear_names[current_gear][0] + ", "+str(round(hybrid_battery,1))+"\n" + str(round(current_speed / 15, 1)) + "MPH", x=60, y=24,font="helvB24", clear_screen=False)
     lcd.update()
 
 def check_battery():
