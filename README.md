@@ -1,27 +1,19 @@
 # AP_personal_project_eCVT
 Model of Toyota's hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms EV3.
 
-## Contents
- - [Navigation and Video Walkthroughs](#navigation-and-video-walkthroughs)
- - [Hardware](#hardware)
- - [Kinematics Equations](#kinematics-equations)
- - [Software](#software)
- - [Updates](#updates)
-
-## Navigation and Video Walkthroughs
-
-### Navigating Main Folders
+## Navigating Main Folders
 |Folder|Contents|
 |--------|--------|
 |**Code Files**|All code files, split into Laptop, Analysis, and EV3 files|
 |**Data**|CSV file with empirical data|
 |**Media**|Includes all photo media|
 
-
-### Video Demonstration Links
- - [Demonstration of eCVT](https://drive.google.com/file/d/1AhYpI9F_Cd5zOatm2PwSbGdc_tSj70io/view?usp=share_link)
- - [Demonstration of Motor Data Visualization](https://drive.google.com/file/d/15FJaNPaWlunaGZE18toF5-Q3PvSbY2L1/view?usp=share_link)
-
+## Contents
+ - [Hardware](#hardware)
+ - [Kinematics Equations](#kinematics-equations)
+ - [Software](#software)
+ - [Updates](#updates)
+ - [Photo and Video Demonstrations](#photo-and-video-demonstrations)
 
 
 ## Hardware
@@ -189,3 +181,13 @@ The theoretical and empirical models differ by only **8.4 degrees**, meaning the
  - Introduced [ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/ev3controller.py) for standalone operation
  - Updated battery and acceleration models for increased accuracy (though not perfect)
  - Updated kinematic equations: MG1 and Engine coefficient now multiplied by -1 due to motor and gear repositioning.
+
+
+## Photo and Video Demonstrations
+
+### [Photo Links](https://drive.google.com/drive/folders/17xYAtpC4oUWsjfBpzBshHM2Pyze0ZJZb?usp=sharing)
+
+### Video Demonstration Links
+ - [Demonstration of eCVT](https://drive.google.com/file/d/1AhYpI9F_Cd5zOatm2PwSbGdc_tSj70io/view?usp=share_link)
+ - [Demonstration of Motor Data Visualization](https://drive.google.com/file/d/15FJaNPaWlunaGZE18toF5-Q3PvSbY2L1/view?usp=share_link)
+
