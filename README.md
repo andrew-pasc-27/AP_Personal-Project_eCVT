@@ -147,21 +147,21 @@ The theoretical and empirical models differ by only **8.4 degrees**, meaning the
 
 ### Code File Descriptions (Latest file first):
 
- - **[ev3controller_with_sockets.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller_with_sockets.py)** and **[laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptop_to_ev3controller.py):** Control code that establishes socket connection between laptop and EV3 brick, allowing real-time telemetry visualization on the laptop while the EV3 runs the eCVT simulation.
+ - **[ev3controller_with_sockets.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/ev3controller_with_sockets.py)** and **[laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/laptop/laptop_to_ev3controller.py):** Control code that establishes socket connection between laptop and EV3 brick, allowing real-time telemetry visualization on the laptop while the EV3 runs the eCVT simulation.
 
  - **[ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py):** A standalone control code file using color sensor joystick, combining most of the features from the socket-based implementation without requiring a laptop connection.
 
- - **[ev3side.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3side.py)** and **[laptopside.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptopside.py):** Original socket-based control implementation with separate files for EV3 and laptop communication.
+ - **[ev3side.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/ev3side.py)** and **[laptopside.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/laptop/laptopside.py):** Original socket-based control implementation with separate files for EV3 and laptop communication.
 
- - **[data_analysis.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_analysis.py):** Processes empirical data from data_farm scripts and uses numpy's `lstsq()` to estimate constraint plane coefficients for the empirical model.
+ - **[data_analysis.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/analysis/data_analysis.py):** Processes empirical data from data_farm scripts and uses numpy's `lstsq()` to estimate constraint plane coefficients for the empirical model.
 
- - **[data_farm_1.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_farm_1.py)** and **[data_farm_2.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_farm_2.py):** Data collection scripts that systematically vary motor speeds and record resulting angular velocities for empirical analysis.
+ - **[data_farm_1.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/analysis/data_farm_1.py)** and **[data_farm_2.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/analysis/data_farm_2.py):** Data collection scripts that systematically vary motor speeds and record resulting angular velocities for empirical analysis.
 
 ### Libraries:
 | Library | Type | Purpose |
 |-----------|-----------|------------------------|
 | `Numpy` | Data Analysis | Allowed for [regression analysis](#regression-equation-analysis) of empirical data |
-| `Matplotlib` | Data Visualization | Allows for real time motor data visualization in [laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptop_to_ev3controller.py) |
+| `Matplotlib` | Data Visualization | Allows for real time motor data visualization in [laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/laptop/laptop_to_ev3controller.py) |
 | `Ev3Dev2` | Mindstorms Control | Allows python script to communicate with EV3 components |
 | `Socket` | Networking | Allows computer and EV3 to connect over a low-level interface |
 | `Tkinter` | User Interface | Allows for real user interface that improves experience |
@@ -178,14 +178,14 @@ The theoretical and empirical models differ by only **8.4 degrees**, meaning the
 ## Updates
 
 ### Future Updates (by file):
- - **[laptopside.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptopside.py):** Battery discharge model isn't accurate
- - **[data_farm_2.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_farm_2.py):** Need to include all data collection methods
+ - **[laptopside.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/laptop/laptopside.py):** Battery discharge model isn't accurate
+ - **[data_farm_2.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/analysis/data_farm_2.py):** Need to include all data collection methods
 
 ### Recent Updates (Latest first)
 
- - Introduced [ev3controller_with_sockets.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller_with_sockets.py) and [laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptop_to_ev3controller.py) for improved socket-based control with real-time visualization
+ - Introduced [ev3controller_with_sockets.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/ev3controller_with_sockets.py) and [laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/laptop/laptop_to_ev3controller.py) for improved socket-based control with real-time visualization
  - Reduced runtime between iterations by improving LCD display dynamics.
  - Fixed mechanical clicking issue by improving ring gear connector and separating parts
- - Introduced [ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py) for standalone operation
+ - Introduced [ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/ev3controller.py) for standalone operation
  - Updated battery and acceleration models for increased accuracy (though not perfect)
  - Updated kinematic equations: MG1 and Engine coefficient now multiplied by -1 due to motor and gear repositioning.
