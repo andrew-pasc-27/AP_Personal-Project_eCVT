@@ -4,9 +4,9 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 ## Navigating Main Folders
 |Folder|Contents|
 |--------|--------|
-|**Data**|Python files and CSV files regarding empirical data|
+|**Data**|CSV file with empirical data|
 |**Media**|Includes all photo media|
-|**SRC**|EV3 Control Files, split into Laptop and EV3 files|
+|**SRC**|All Code Files, split into Laptop, Analysis, and EV3 files|
 
 ## Video Demonstration Links
  - [Demonstration of eCVT](https://drive.google.com/file/d/1AhYpI9F_Cd5zOatm2PwSbGdc_tSj70io/view?usp=share_link)
