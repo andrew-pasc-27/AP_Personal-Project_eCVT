@@ -171,4 +171,25 @@ The theoretical and empirical models differ by only **8.4 deg**, meaning the the
  - Fixed mechanical clicking issue by improving ring gear connector and separating parts
  - Introduced [ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py) for standalone operation
  - Updated battery and acceleration models for increased accuracy (though not perfect)
- - Updated kinematic equations: MG1 coefficient now multiplied by -1 due to repositioning (see data_analysis.py for details)
+ - Updated kinematic equations: MG1 and Engine coefficient now multiplied by -1 due to motor and gear repositioning. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
