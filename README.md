@@ -1,12 +1,11 @@
 # AP_personal_project_eCVT
-Model of Toyota's hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms EV3.
+Model of Toyota's hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms EV3. [Photo and Video Demonstrations](#photo-and-video-demonstrations).
 
 ## Navigating Main Folders
 |Folder|Contents|
 |--------|--------|
 |**Code Files**|All code files, split into Laptop, Analysis, and EV3 files|
 |**Data**|CSV file with empirical data|
-|**Media**|Includes all photo media|
 
 ## Contents
  - [Hardware](#hardware)
@@ -182,10 +181,26 @@ The theoretical and empirical models differ by only **8.4 degrees**, meaning the
  - Updated battery and acceleration models for increased accuracy (though not perfect)
  - Updated kinematic equations: MG1 and Engine coefficient now multiplied by -1 due to motor and gear repositioning.
 
+---
 
 ## Photo and Video Demonstrations
 
 ### [Photo Links](https://drive.google.com/drive/folders/17xYAtpC4oUWsjfBpzBshHM2Pyze0ZJZb?usp=sharing)
+|File Name|Description|Photo|
+|----------|--------------|----------------|
+|Full_view.JPG|Picture of full project|[Photo](http://googleusercontent.com/1c6ZBOjfthbnSfma8C2UreUI_R3tkRk-a/)|
+|eCVT_front_view.JPG|Front view of the mechanism|[Photo](http://googleusercontent.com/1HQQ8KYJqfhP-_w82xa1k1beVVuEEUYyj/)|
+|eCVT_left_view.JPG|Left view of the mechanism|[Photo](http://googleusercontent.com/1Ono0oIDUaL46-JC8HQw7NckpBV3KTFu0/)|
+|eCVT_back_view.JPG|Back view of the mechanism|[Photo](http://googleusercontent.com/107h0N5Bt4Jwexhr2DZb9mmuZLEPgpMMU/)|
+|eCVT_right_view.JPG|Right view of the mechanism|[Photo](http://googleusercontent.com/1027HEu1eSi3z3dFZGY_5yqbovNXwa7ky/)|
+|right_side_close_up.JPG|Close up of the right side structure|[Photo](http://googleusercontent.com/13yyp-sgcu0LNNqEp46dTIAVm154Kgke1)|
+|left_side_close_up.JPG|Close up of the left side structure|[Photo](http://googleusercontent.com/1wLIKjvOPCafX0Vlxo30Lwnah4A0p3qaS/)|
+|Ring+carrier_close_up.JPG|Close up of the inner mechanism|[Photo](http://googleusercontent.com/1FyYQh4XAfozECYoEj1SbI-XL4pL1RtfY/)|
+|ring_close_up.JPG|Close up of the ring and its holder|[Photo](http://googleusercontent.com/1vwPXbSGuAI6pLpXREB1CK-304CPGR6Qs)|
+|carrier_close_up.JPG|Close up sun and carrier|[Photo](http://googleusercontent.com/1WU8KTsL94cW_0TlH9SQV6PSYqZ29uYCT/)|
+|joystick_full_view.JPG|Top view of joystick|[Photo](http://googleusercontent.com/1oqqt5t1GAgovZ-C9y-axj_9s4HvweXMF/)|
+|joystick_interior.JPG|View of joystick without cover to see mechanism|[Photo](http://googleusercontent.com/1ZN-UuigLEgocgNdrgFCCrtRku-s_Edj5/)|
+
 
 ### Video Demonstration Links
  - [Demonstration of eCVT](https://drive.google.com/file/d/1AhYpI9F_Cd5zOatm2PwSbGdc_tSj70io/view?usp=share_link)
