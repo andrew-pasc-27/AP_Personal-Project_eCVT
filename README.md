@@ -1,6 +1,5 @@
 # AP_personal_project_eCVT
-Model of Toyota's hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms. 
-
+Model of Toyota's hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms EV3. 
 
 ## Contents
  - [Hardware](#hardware)
@@ -16,19 +15,18 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
  - Sun is a 36 tooth gear, planets consist of a 16 tooth gear and a 36 tooth gear (due to gear size limitations)
  - Technic Liftarm frames make up most of the structure.
  - Small flat-4 engine model connected to Engine motor (could not use an inline-4 model due to piece and size limitations).
- - Final drive wheel uses a 1:5 gear reduction from the ring gear axle. 
 
 ### Electrical/Control Components:
- - Medium ev3 motor used for MG1, 12:20 tooth ratio between MG1 and axle connecting to sun gear, so MG1 has more torque, which is needed due to Lego tolerances and static friction.
- - 2 Large ev3 motors used for MG2 and the Engine.
- - Color Sensor used for gas/brake joystick, created using .reflected_light_intensity attribute. As joystick lever gets closer, reflected light has a larger intensity.
- - Mindstorms ev3 brick used with a flashed SD card that holds an [ev3dev-stretch boot image](https://www.ev3dev.org/downloads/).
+ - Mindstorms EV3 brick used as central control device.
+ - Medium EV3 motor used for MG1, 12:20 tooth ratio between MG1 and axle connecting to sun gear, so MG1 has more torque, which is needed due to Lego tolerances and static friction.
+ - 2 Large EV3 motors used for MG2 and the Engine. MG2 has a 24:40 tooth ratio with the ring gear axle, and Engine has a 12:60 ratio with carrier gear.
+ - Color Sensor used for gas/brake joystick.
  - Built in PID controllers allow motors to maintain speed regardless of driven wheel resistance.
 
 ## Kinematics Equations
  - [The Theoretical Equation](#simplified-constraint-equation)
- - [The Empirical Equation](#regression-analysis)
- - [Comparison](#theoretical-vs.-empirical-comparison)
+ - [The Empirical Equation](#regression-equation-analysis)
+ - [Comparison](#vector-comparison)
 
 ### Finding Theoretical Equation
 
@@ -80,7 +78,7 @@ $$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
 
 Empirical data on angular velocity was collected by systematically varying motor speeds and measuring the third motor speed. This data was processed through least squares regression to establish an empirical model.
 
-#### Regression Analysis
+#### Regression Equation Analysis
 
 Using numpy's least squares algorithm (`lstsq()`), the empirical constraint equation is:
 
@@ -108,7 +106,7 @@ $$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
 
 $$\vec{n_{\text{theory, normalized}}} = \frac{\vec{n_{\text{theory}}}}{2.334} = \langle -0.257, -0.420, 1 \rangle$$
 
-**Observation:** The empirical vector shows the engine has less influence than theory predicts, likely due to mechanical friction and gear lash.
+**Observation:** The empirical vector shows the engine has less influence on the final output than theory predicts, likely due to mechanical friction and gear path.
 
 #### Angle Between Vectors
 
@@ -124,7 +122,7 @@ $$\theta = \arccos\left(\frac{2.736}{2.766 \times 1.032}\right) = 8.446°$$
 
 #### Conclusion
 
-The theoretical and empirical models differ by only **8.4 degrees**, indicating excellent agreement between the mathematical model and the physical system. The small discrepancy is attributable to mechanical constraints such as friction, gear tolerance, and backlash in the LEGO mechanism.
+The theoretical and empirical models differ by only **8.4 deg**, meaning the theoretical and empirical models are very similar. The small discrepancy is can be attributed to mechanical constraints such as friction, gear play, and tension in the LEGO mechanism.
 
 ---
 
@@ -132,30 +130,45 @@ The theoretical and empirical models differ by only **8.4 degrees**, indicating 
 
 ### Code File Descriptions (Latest file first):
 
+ - **[ev3controller_with_sockets.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller_with_sockets.py)** and **[laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptop_to_ev3controller.py)**: Expansion on ev3controller.py, utilizing sockets to send live motor data to the laptop, which displays them on a graph over time. Allows for real time data analysis.
+
  - **[ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py):** A standalone control code file using color sensor joystick, combining most of the functionality from ev3side.py and laptopside.py. Allows direct control without network connection.
 
- - **[ev3side.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3side.py) and [laptopside.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptopside.py):** Two files that communicate via sockets. The EV3 has limited processing power, so the laptop handles data analysis and visualization while the EV3 handles motor control. A tkinter GUI on the laptop displays real-time telemetry.
+ - **[ev3side.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3side.py) and [laptopside.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptopside.py):** Two files that communicate via sockets. The EV3 has limited processing power, so the laptop handles data analysis and computation while the EV3 handles motor control. A tkinter GUI on the laptop displays real-time telemetry.
 
  - **[data_analysis.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_analysis.py):** Processes empirical data from data_farm scripts and uses numpy's `lstsq()` to establish the plane equation relating MG1, MG2, and ENGINE speeds.
 
  - **[data_farm_1.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_farm_1.py) and [data_farm_2.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_farm_2.py):** Data collection scripts that vary two motor speeds, record the resulting third motor speed, and log angular velocity measurements to CSV files for regression analysis.
+
+### Libraries:
+| Library | Type | Purpose |
+|-----------|-----------|------------------------|
+| `Numpy` | Data Analysis | Allowed for [regression analysis](#regression-equation-analysis) of empirical data |
+| `Matplotlib` | Data Visualization | Allows for real time motor data visualization in [laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptop_to_ev3controller.py) | 
+| `Ev3Dev2` | Mindstorms Control | Allows python script to communicate with EV3 components |
+| `Socket` | Networking | Allows computer and EV3 to connect over a low-level interface |
+| `Tkinter` | User Interface | Allows for real user interface that improves experience |
+| `Time` | Standard Library | Allows set intervals for when EV3 should run |
+
+### Software Implementations:
+
+ - **Color Sensor Joystick:** Using .reflected_light_intensity attribute, an EV3 color sensor was used for the gas/brake joystick. As the joystick lever moves closer to the sensor, the intensity of reflected light increases, which is then translated into faster motor speeds. Similarly, when the joystick lever moves farther away from the sensor, the intensity of reflected light decreases, which is translated to a slower motor speed.
+
+ - **Laptop and EV3 connection:** Used Socket library. The EV3 runs its code file, setting up a socket server and listening for any connection requests. Concurrently, the laptop initializes its socket with the EV3’s IP address, searching for it to establish a connection. Once the IP is located, the Laptop and EV3 connect and are able to send and receive data.
 
 ---
 
 ## Updates
 
 ### Future Updates (by file):
-
- - **[ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py):** Needs socket connection to laptop for real-time data graphs
- - **[ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py):** Acceleration model could be smoother/more accurate.
- - **[ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py):** Battery discharge model needed for increased accuracy
  - **[laptopside.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptopside.py):** Battery discharge model isn't accurate
  - **[data_farm_2.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/data_farm_2.py):** Need to include all data collection methods
 
-### Recent Updates
+### Recent Updates (Latest first)
 
+ - Introduced [ev3controller_with_sockets.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller_with_sockets.py) and [laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/laptop_to_ev3controller.py) for real time graphing of motor data.
+ - Reduced runtime between iterations by improving LCD display dynamics.
  - Fixed mechanical clicking issue by improving ring gear connector and separating parts
- - Introduced ev3controller.py for simplified standalone operation
- - Fixed acceleration smoothness issue in laptopside.py (in ev3controller.py)
- - Added tkinter GUI interface for laptopside.py with real-time motor speed display
+ - Introduced [ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py) for standalone operation
+ - Updated battery and acceleration models for increased accuracy (though not perfect)
  - Updated kinematic equations: MG1 coefficient now multiplied by -1 due to repositioning (see data_analysis.py for details)
