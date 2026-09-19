@@ -25,6 +25,7 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 <img width="525" height="700" alt="ring_close_up" src="https://github.com/user-attachments/assets/dbfd965f-d79c-4fea-9212-91a023d91ba7" />
 
 - 4 11x11 Quarter Gear Rings were used to assemble the ring gear, a connector hub with three axles (120 degrees apart) was used to transfer ring gear rotation into an axle.
+- Previous iterations used a 4 spoke design with technic frame pieces
 #### Carrier, Sun Gear:
 <img width="525" height="700" alt="carrier_close_up" src="https://github.com/user-attachments/assets/7fe5148b-204e-41c8-8000-58254cd7af67" />
 
@@ -35,7 +36,7 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 #### Structure: 
 <img width="525" height="700" alt="ECVT_front_view" src="https://github.com/user-attachments/assets/03bee773-50c9-4768-89ed-c35c8ddd9289" />
 
-*MG2 mounted on the right; MG1 and Engine mounted on the left*
+*MG1 and Engine mounted on the left; MG2 mounted on the right*
  - Technic Liftarm frames make up most of the structure.
  - Small flat-4 engine model connected to Engine motor (could not use an inline-4 model due to piece and size limitations).
 
@@ -204,7 +205,7 @@ The theoretical and empirical models differ by only **8.4 degrees**, meaning the
 
 ## Photo and Video Demonstrations
 
-### [Photo Links](https://drive.google.com/drive/folders/17xYAtpC4oUWsjfBpzBshHM2Pyze0ZJZb?usp=sharing)
+### [All Photo Links](https://drive.google.com/drive/folders/17xYAtpC4oUWsjfBpzBshHM2Pyze0ZJZb?usp=sharing)
 |File Name|Description|Photo|
 |----------|--------------|----------------|
 |Full_view.JPG|Picture of full project|[Photo](https://drive.google.com/file/d/1c6ZBOjfthbnSfma8C2UreUI_R3tkRk-a/)|
