@@ -17,13 +17,18 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 
 ## Hardware
 ### Photo
-<img width="1512" height="2016" alt="Full_view" src="https://github.com/user-attachments/assets/8f8e9c92-b1e3-4266-80a2-9ada66f4c43b" />
+![Full Model View](https://github.com/user-attachments/assets/8f8e9c92-b1e3-4266-80a2-9ada66f4c43b)
+**Full Model View**
+- Includes eCVT Model (back), Mindstorms control unit (front left), Joystick (front right)
 
 ### Mechanical Parts description: 
- - 4 11x11 Quarter Gear Rings were used to assemble the ring gear, a connector hub with three axles (120 degrees apart) was used to transfer ring gear rotation into an axle rotation. Axle is connected to the ring gear through a 60 tooth turntable.
+ - 4 11x11 Quarter Gear Rings were used to assemble the ring gear, a connector hub with three axles (120 degrees apart) was used to transfer ring gear rotation into an axle. <img width="120" height="140" alt="ring_close_up" src="https://github.com/user-attachments/assets/dbfd965f-d79c-4fea-9212-91a023d91ba7" />
+       **Ring Gear Close Up:** Ring attached to connector hub
  - 60 tooth turntable (piece with hole in middle, where axle connecting to sun gear lies) was used to power the carrier. It is meshed with a twelve tooth gear. 
  - Carrier consists of axle connectors with pin holes for gears, used axles and connectors instead of technic beams due to gear size limitations.
  - Sun is a 36 tooth gear, planets consist of a 16 tooth gear and a 36 tooth gear (due to gear size limitations)
+<img width="120" height="140" alt="carrier_close_up" src="https://github.com/user-attachments/assets/dd826cfa-12cd-428e-845d-49ca655792ca" />
+       **Carrier Close Up:** Sun is in middle, 2 planets on both right and left of sun.  
  - Technic Liftarm frames make up most of the structure.
  - Small flat-4 engine model connected to Engine motor (could not use an inline-4 model due to piece and size limitations).
 
@@ -31,7 +36,8 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
  - Mindstorms EV3 brick used as central control device.
  - Medium EV3 motor used for MG1, 12:20 tooth ratio between MG1 and axle connecting to sun gear, so MG1 has more torque, which is needed due to Lego tolerances and static friction.
  - 2 Large EV3 motors used for MG2 and the Engine. MG2 has a 24:40 tooth ratio with the ring gear axle, and Engine has a 12:60 ratio with carrier gear.
- - Color Sensor used for gas/brake joystick.
+ - Color Sensor used for gas/brake joystick: <img width="120" height="140" alt="joystick_full_view" src="https://github.com/user-attachments/assets/b888a258-9997-4a10-9957-4a15ebe75d19" />
+
  - Built in PID controllers allow motors to maintain speed regardless of driven wheel resistance.
 
 ## Kinematics Equations
