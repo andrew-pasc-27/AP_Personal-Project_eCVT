@@ -45,10 +45,10 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
  - Medium EV3 motor used for MG1, 12:20 tooth ratio between MG1 and axle connecting to sun gear, so MG1 has more torque, which is needed due to Lego tolerances and static friction.
  - 2 Large EV3 motors used for MG2 and the Engine. MG2 has a 24:40 tooth ratio with the ring gear axle, and the Engine has a 12:60 ratio with the carrier gear.
  - Used the built-in PID controllers to allow motors to maintain speed regardless of driven wheel resistance.
- - Color Sensor used for gas/brake joystick:
+ - Used custom Lego Joystick for precise throttle input. 
 
 <img width="225" height="300" alt="joystick_full_view" src="https://github.com/user-attachments/assets/b888a258-9997-4a10-9957-4a15ebe75d19" /> <img width="225" height="300" alt="joystick_interior" src="https://github.com/user-attachments/assets/f670a8f3-6bdc-486c-a031-2f9e1349093d" />
-*Joystick exterior (left) and interior (right)*
+*Joystick exterior (left) and interior (right). [Implemented using Color Sensor](#software-implementations)*
 
 ## Kinematics Equations
  - [The Theoretical Equation](#simplified-constraint-equation)
