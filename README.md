@@ -16,10 +16,9 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 
 
 ## Hardware
-### Photo
+### Full Model View
 ![Full Model View](https://github.com/user-attachments/assets/8f8e9c92-b1e3-4266-80a2-9ada66f4c43b)
-**Full Model View**
-- Includes eCVT Model (back), Mindstorms control unit (front left), Joystick (front right)
+*Includes eCVT Model (back), Mindstorms control unit (front left), Joystick (front right)*
 
 ### Mechanical Parts description: 
 #### Ring Gear:
@@ -49,7 +48,7 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 
 <img width="225" height="300" alt="joystick_full_view" src="https://github.com/user-attachments/assets/b888a258-9997-4a10-9957-4a15ebe75d19" /> <img width="225" height="300" alt="joystick_interior" src="https://github.com/user-attachments/assets/f670a8f3-6bdc-486c-a031-2f9e1349093d" />
 
-*Joystick exterior (right) and interior (left)*
+*Joystick exterior (left) and interior (right)*
 
 ## Kinematics Equations
  - [The Theoretical Equation](#simplified-constraint-equation)
@@ -220,9 +219,6 @@ The theoretical and empirical models differ by only **8.4 degrees**, meaning the
 |carrier_close_up.JPG|Close up sun and carrier|[Photo](https://drive.google.com/file/d/1WU8KTsL94cW_0TlH9SQV6PSYqZ29uYCT/view?usp=share_link)|
 |joystick_full_view.JPG|Top view of joystick|[Photo](https://drive.google.com/file/d/1oqqt5t1GAgovZ-C9y-axj_9s4HvweXMF/)|
 |joystick_interior.JPG|View of joystick without cover to see mechanism|[Photo](https://drive.google.com/file/d/1ZN-UuigLEgocgNdrgFCCrtRku-s_Edj5/)|
-
-
-
 
 
 ### Video Demonstration Links
