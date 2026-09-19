@@ -1,8 +1,6 @@
 # AP_personal_project_eCVT
 Model of Toyota's hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms EV3. [Photo and Video Demonstrations](#photo-and-video-demonstrations).
 
-<img width="1512" height="2016" alt="Full_view" src="https://github.com/user-attachments/assets/8f8e9c92-b1e3-4266-80a2-9ada66f4c43b" />
-
 ## Navigating Main Folders
 |Folder|Contents|
 |--------|--------|
@@ -18,6 +16,9 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 
 
 ## Hardware
+### Photo
+<img width="1512" height="2016" alt="Full_view" src="https://github.com/user-attachments/assets/8f8e9c92-b1e3-4266-80a2-9ada66f4c43b" />
+
 ### Mechanical Parts description: 
  - 4 11x11 Quarter Gear Rings were used to assemble the ring gear, a connector hub with three axles (120 degrees apart) was used to transfer ring gear rotation into an axle rotation. Axle is connected to the ring gear through a 60 tooth turntable.
  - 60 tooth turntable (piece with hole in middle, where axle connecting to sun gear lies) was used to power the carrier. It is meshed with a twelve tooth gear. 
