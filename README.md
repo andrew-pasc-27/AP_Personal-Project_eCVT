@@ -24,15 +24,18 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 ### Mechanical Parts description: 
 #### Ring Gear:
 <img width="600" height="700" alt="ring_close_up" src="https://github.com/user-attachments/assets/dbfd965f-d79c-4fea-9212-91a023d91ba7" />
- - 4 11x11 Quarter Gear Rings were used to assemble the ring gear, a connector hub with three axles (120 degrees apart) was used to transfer ring gear rotation into an axle.
+
+- 4 11x11 Quarter Gear Rings were used to assemble the ring gear, a connector hub with three axles (120 degrees apart) was used to transfer ring gear rotation into an axle.
 #### Carrier, Sun Gear:
-<img width="600" height="700" alt="Ring+carrier_close_up" src="https://github.com/user-attachments/assets/be018608-450e-4c59-85fb-4998a20e658f" />
+<img width="600" height="700" alt="carrier_close_up" src="https://github.com/user-attachments/assets/7fe5148b-204e-41c8-8000-58254cd7af67" />
+
 *Includes both the Carrier and Sun Gear*
- - Carrier consists of axle connectors with pin holes for gears, used axles and connectors instead of technic beams due to gear size limitations.
- - Sun is a 36 tooth gear, planets consist of a 16 tooth gear and a 36 tooth gear (due to gear size limitations)
- - 60 tooth turntable (piece with hole in middle, where axle connecting to sun gear lies) was used to power the carrier. It is meshed with a twelve tooth gear.
+- Carrier consists of axle connectors with pin holes for gears, used axles and connectors instead of technic beams due to gear size limitations.
+- Sun is a 36 tooth gear, planets consist of a 16 tooth gear and a 36 tooth gear (due to gear size limitations)
+- 60 tooth turntable (piece with hole in middle, where axle connecting to sun gear lies) was used to power the carrier. It is meshed with a twelve tooth gear.
 #### Structure: 
 <img width="600" height="700" alt="ECVT_front_view" src="https://github.com/user-attachments/assets/03bee773-50c9-4768-89ed-c35c8ddd9289" />
+
 *MG2 mounted on the right; MG1 and Engine mounted on the left*
  - Technic Liftarm frames make up most of the structure.
  - Small flat-4 engine model connected to Engine motor (could not use an inline-4 model due to piece and size limitations).
@@ -43,7 +46,7 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
  - 2 Large EV3 motors used for MG2 and the Engine. MG2 has a 24:40 tooth ratio with the ring gear axle, and the Engine has a 12:60 ratio with the carrier gear.
  - Used the built-in PID controllers to allow motors to maintain speed regardless of driven wheel resistance.
  - Color Sensor used for gas/brake joystick:
-<img width="60" height="70" alt="joystick_full_view" src="https://github.com/user-attachments/assets/b888a258-9997-4a10-9957-4a15ebe75d19" /> <img width="60" height="70" alt="joystick_interior" src="https://github.com/user-attachments/assets/f670a8f3-6bdc-486c-a031-2f9e1349093d" />
+<img width="300" height="350" alt="joystick_full_view" src="https://github.com/user-attachments/assets/b888a258-9997-4a10-9957-4a15ebe75d19" /> <img width="300" height="350" alt="joystick_interior" src="https://github.com/user-attachments/assets/f670a8f3-6bdc-486c-a031-2f9e1349093d" />
 *Joystick exterior (right) and interior (left)*
 
 ## Kinematics Equations
