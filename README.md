@@ -48,7 +48,6 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
  - Color Sensor used for gas/brake joystick:
 
 <img width="225" height="300" alt="joystick_full_view" src="https://github.com/user-attachments/assets/b888a258-9997-4a10-9957-4a15ebe75d19" /> <img width="225" height="300" alt="joystick_interior" src="https://github.com/user-attachments/assets/f670a8f3-6bdc-486c-a031-2f9e1349093d" />
-
 *Joystick exterior (left) and interior (right)*
 
 ## Kinematics Equations
