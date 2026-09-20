@@ -153,7 +153,7 @@ $$\vec{n_{\text{empirical}}} = \langle -0.2605, -0.2506, 1 \rangle$$
 
 #### Conclusion
 
-The engine motor has less influence on the final output than theory suggests. However, the theoretical and empirical models differ by only **8.4 degrees**, meaning the theoretical and empirical models are very similar. The small discrepancy can be attributed to mechanical constraints and friction losses in the system.
+The engine motor has less influence on the final output than theory suggests. However, the theoretical and empirical models differ by only **8.4 degrees**, with the engine accounting for most of the difference. The small discrepancy can be attributed to mechanical constraints and friction losses in the system.
 
 ---
 
