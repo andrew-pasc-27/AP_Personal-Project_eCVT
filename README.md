@@ -20,35 +20,30 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 ![Full Model View](https://github.com/user-attachments/assets/8f8e9c92-b1e3-4266-80a2-9ada66f4c43b)
 *Includes eCVT Model (back), Mindstorms control unit (front left), Joystick (front right)*
 
-### Mechanical Parts description: 
-#### Ring Gear:
-<img width="525" height="700" alt="ring_close_up" src="https://github.com/user-attachments/assets/dbfd965f-d79c-4fea-9212-91a023d91ba7" />
+### Planetary Gearset
 
-- 4 11x11 Quarter Gear Rings were used to assemble the ring gear, a connector hub with three axles (120 degrees apart) was used to transfer ring gear rotation into an axle.
-- Previous iterations used a 4 spoke design with technic frame pieces
-#### Carrier, Sun Gear:
-<img width="525" height="700" alt="carrier_close_up" src="https://github.com/user-attachments/assets/7fe5148b-204e-41c8-8000-58254cd7af67" />
+| Ring Gear | Carrier + Sun Gear |
+|-----------|--------------------|
+| <img src="https://github.com/user-attachments/assets/dbfd965f-d79c-4fea-9212-91a023d91ba7" width="320" alt="Ring gear close-up"> | <img src="https://github.com/user-attachments/assets/7fe5148b-204e-41c8-8000-58254cd7af67" width="320" alt="Carrier and sun gear"> |
 
-*Includes both the Carrier and Sun Gear*
-- Carrier consists of axle connectors with pin holes for gears, used axles and connectors instead of technic beams due to gear size limitations.
-- Sun is a 36 tooth gear, planets consist of a 16 tooth gear and a 36 tooth gear (due to gear size limitations)
-- 60 tooth turntable (piece with hole in middle, where axle connecting to sun gear lies) was used to power the carrier. It is meshed with a twelve tooth gear.
-#### Structure: 
-<img width="525" height="700" alt="ECVT_front_view" src="https://github.com/user-attachments/assets/03bee773-50c9-4768-89ed-c35c8ddd9289" />
+- **Ring gear**: Built from four 11×11 quarter gear rings. A three-axle hub (120° spacing) transfers rotation to the output.
+- **Carrier & Sun**: Carrier uses axle connectors instead of beams due to gear size limits. Sun is a 36-tooth gear; planets are 16T + 36T. A 60-tooth turntable drives the carrier.
 
-*MG1 and Engine mounted on the left; MG2 mounted on the right*
- - Technic Liftarm frames make up most of the structure.
- - Small flat-4 engine model connected to Engine motor (could not use an inline-4 model due to piece and size limitations).
+### Overall Structure
+<img src="https://github.com/user-attachments/assets/03bee773-50c9-4768-89ed-c35c8ddd9289" width="500" alt="Front view of the structure">
 
-### Electrical/Control Components:
- - Mindstorms EV3 brick used as central control device. 
- - Medium EV3 motor used for MG1, 12:20 tooth ratio between MG1 and axle connecting to sun gear, so MG1 has more torque, which is needed due to Lego tolerances and static friction.
- - 2 Large EV3 motors used for MG2 and the Engine. MG2 has a 24:40 tooth ratio with the ring gear axle, and the Engine has a 12:60 ratio with the carrier gear.
- - Used the built-in PID controllers to allow motors to maintain speed regardless of driven wheel resistance.
- - Used custom Lego Joystick for precise throttle input. 
+*MG1 and Engine on the left, MG2 on the right. Technic liftarm frame with a small flat-4 engine model.*
 
-<img width="225" height="300" alt="joystick_full_view" src="https://github.com/user-attachments/assets/b888a258-9997-4a10-9957-4a15ebe75d19" /> <img width="225" height="300" alt="joystick_interior" src="https://github.com/user-attachments/assets/f670a8f3-6bdc-486c-a031-2f9e1349093d" /> <br>
-*Joystick exterior (left) and interior (right). [Implemented using Color Sensor](#software-implementations)*
+### Electrical / Control Components
+- EV3 brick as the central controller
+- Medium motor for MG1 (12:20 reduction for higher torque)
+- Two large motors for MG2 and Engine (24:40 and 12:60 reductions)
+- Built-in PID keeps motor speeds stable under load
+- Custom color-sensor joystick for analog throttle input
+
+| Joystick Exterior | Joystick Interior |
+|-------------------|-------------------|
+| <img src="https://github.com/user-attachments/assets/b888a258-9997-4a10-9957-4a15ebe75d19" width="220" alt="Joystick exterior"> | <img src="https://github.com/user-attachments/assets/f670a8f3-6bdc-486c-a031-2f9e1349093d" width="220" alt="Joystick interior"> |
 
 ## Kinematics Equations
  - [The Theoretical Equation](#simplified-constraint-equation)
