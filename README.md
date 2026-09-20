@@ -49,7 +49,7 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
  - [The Theoretical Equation](#simplified-constraint-equation)
  - [The Empirical Equation](#regression-equation-analysis)
  - [Comparison](#vector-comparison)
- - 
+
 ### The Theoretical Equation
 <details>
 
