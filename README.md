@@ -51,40 +51,45 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
  - [Comparison](#vector-comparison)
 
 ### Finding Theoretical Equation
+<details>
+  <summary>Click to View Methodology</summary>
+  
+  The kinematic equation for a standard planetary (epicyclic) gear set, known as the **Willis Equation**, is:
 
-The kinematic equation for a standard planetary (epicyclic) gear set, known as the **Willis Equation**, is:
+  $$(1+k)\omega_C = \omega_S + k\omega_R$$
+  
+  Where:
+  - $k$ = ratio of ring gear teeth to sun gear teeth
+  - $\omega_C$ = carrier angular velocity
+  - $\omega_S$ = sun angular velocity
+  - $\omega_R$ = ring angular velocity
+  
+  #### Calculating the K Factor
+  
+  $$k = \frac{\text{Ring teeth}}{\text{Sun teeth}} = \frac{140}{36} = 3.889$$
+  
+  #### Gear Ratios and Coefficients
+  
+  Since the motors and engine are not directly connected to the planetary gears, we must account for intermediate gear reductions:
+  
+  | Component | Gear Ratio | Calculation | Value |
+  |-----------|-----------|-------------|-------|
+  | MG1 → Sun | Input reduction | $-\frac{12}{20}$ | $-0.6$ |
+  | Engine → Carrier | Input reduction | $\frac{12}{60}$ | $0.2$ |
+  | MG2 → Ring | Input reduction | $\frac{24}{40}$ | $0.6$ |
+  
+  *Note: MG1 ratio is multiplied by -1 because there are 2 planet gears*
+  
+  #### Substituting into Willis Equation
+  
+  $$(1 + k) \cdot b \cdot \text{ENGINE} = a \cdot \text{MG1} + k \cdot c \cdot \text{MG2}$$
+  
+  Substituting known values:
+  
+  $$(1 + 3.889) \cdot 0.2 \cdot \text{ENGINE} = -0.6 \cdot \text{MG1} + 3.889 \cdot 0.6 \cdot \text{MG2}$$
 
-$$(1+k)\omega_C = \omega_S + k\omega_R$$
+</details>
 
-Where:
-- $k$ = ratio of ring gear teeth to sun gear teeth
-- $\omega_C$ = carrier angular velocity
-- $\omega_S$ = sun angular velocity
-- $\omega_R$ = ring angular velocity
-
-#### Calculating the K Factor
-
-$$k = \frac{\text{Ring teeth}}{\text{Sun teeth}} = \frac{140}{36} = 3.889$$
-
-#### Gear Ratios and Coefficients
-
-Since the motors and engine are not directly connected to the planetary gears, we must account for intermediate gear reductions:
-
-| Component | Gear Ratio | Calculation | Value |
-|-----------|-----------|-------------|-------|
-| MG1 → Sun | Input reduction | $-\frac{12}{20}$ | $-0.6$ |
-| Engine → Carrier | Input reduction | $\frac{12}{60}$ | $0.2$ |
-| MG2 → Ring | Input reduction | $\frac{24}{40}$ | $0.6$ |
-
-*Note: MG1 ratio is multiplied by -1 because there are 2 planet gears*
-
-#### Substituting into Willis Equation
-
-$$(1 + k) \cdot b \cdot \text{ENGINE} = a \cdot \text{MG1} + k \cdot c \cdot \text{MG2}$$
-
-Substituting known values:
-
-$$(1 + 3.889) \cdot 0.2 \cdot \text{ENGINE} = -0.6 \cdot \text{MG1} + 3.889 \cdot 0.6 \cdot \text{MG2}$$
 
 #### Simplified Constraint Equation
 
@@ -119,32 +124,36 @@ $$\vec{n_{\text{empirical}}} = \langle -0.2605, -0.2506, 1 \rangle$$
 ---
 
 ### Theoretical vs. Empirical Comparison
+<details>
+  <summary>Click to View Methodology</summary>
+ 
+  #### Vector Comparison
+ 
+  To compare the two models, we normalize the theoretical vector by dividing by its largest component:
+  
+  $$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
+  
+  $$\vec{n_{\text{theory, normalized}}} = \frac{\vec{n_{\text{theory}}}}{2.334} = \langle -0.257, -0.420, 1 \rangle$$
+  
+  **Observation:** The empirical vector shows the engine has less influence on the final output than theory predicts, likely due to mechanical friction and gear path.
+  
+  #### Angle Between Vectors
+  
+  To measure how closely the models agree, we calculate the angle between the normal vectors:
+  
+  $$\vec{n_{\text{theory}}} \cdot \vec{n_{\text{empirical}}} = (-0.6)(-0.2605) + (-0.9778)(-0.2506) + (2.334)(1) = 2.736$$
+  
+  $$|\vec{n_{\text{theory}}}| = \sqrt{0.6^2 + 0.9778^2 + 2.334^2} = 2.766$$
+  
+  $$|\vec{n_{\text{empirical}}}| = \sqrt{0.2605^2 + 0.2506^2 + 1^2} = 1.032$$
+  
+  $$\theta = \arccos\left(\frac{2.736}{2.766 \times 1.032}\right) = 8.446°$$
 
-#### Vector Comparison
-
-To compare the two models, we normalize the theoretical vector by dividing by its largest component:
-
-$$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
-
-$$\vec{n_{\text{theory, normalized}}} = \frac{\vec{n_{\text{theory}}}}{2.334} = \langle -0.257, -0.420, 1 \rangle$$
-
-**Observation:** The empirical vector shows the engine has less influence on the final output than theory predicts, likely due to mechanical friction and gear path.
-
-#### Angle Between Vectors
-
-To measure how closely the models agree, we calculate the angle between the normal vectors:
-
-$$\vec{n_{\text{theory}}} \cdot \vec{n_{\text{empirical}}} = (-0.6)(-0.2605) + (-0.9778)(-0.2506) + (2.334)(1) = 2.736$$
-
-$$|\vec{n_{\text{theory}}}| = \sqrt{0.6^2 + 0.9778^2 + 2.334^2} = 2.766$$
-
-$$|\vec{n_{\text{empirical}}}| = \sqrt{0.2605^2 + 0.2506^2 + 1^2} = 1.032$$
-
-$$\theta = \arccos\left(\frac{2.736}{2.766 \times 1.032}\right) = 8.446°$$
+</details>
 
 #### Conclusion
 
-The theoretical and empirical models differ by only **8.4 degrees**, meaning the theoretical and empirical models are very similar. The small discrepancy can be attributed to mechanical constraints and friction losses in the system.
+The engine motor has less influence on the final output than theory suggests. However, the theoretical and empirical models differ by only **8.4 degrees**, meaning the theoretical and empirical models are very similar. The small discrepancy can be attributed to mechanical constraints and friction losses in the system.
 
 ---
 
@@ -199,22 +208,25 @@ The theoretical and empirical models differ by only **8.4 degrees**, meaning the
 
 ## Photo and Video Demonstrations
 
-### [All Photo Links](https://drive.google.com/drive/folders/17xYAtpC4oUWsjfBpzBshHM2Pyze0ZJZb?usp=sharing)
-|File Name|Description|Photo|
-|----------|--------------|----------------|
-|Full_view.JPG|Picture of full project|[Photo](https://drive.google.com/file/d/1c6ZBOjfthbnSfma8C2UreUI_R3tkRk-a/)|
-|eCVT_front_view.JPG|Front view of the mechanism|[Photo](https://drive.google.com/file/d/1HQQ8KYJqfhP-_w82xa1k1beVVuEEUYyj/)|
-|eCVT_left_view.JPG|Left view of the mechanism|[Photo](https://drive.google.com/file/d/1Ono0oIDUaL46-JC8HQw7NckpBV3KTFu0/)|
-|eCVT_back_view.JPG|Back view of the mechanism|[Photo](https://drive.google.com/file/d/107h0N5Bt4Jwexhr2DZb9mmuZLEPgpMMU/view?usp=sharing)|
-|eCVT_right_view.JPG|Right view of the mechanism|[Photo](https://drive.google.com/file/d/1027HEu1eSi3z3dFZGY_5yqbovNXwa7ky/)|
-|right_side_close_up.JPG|Close up of the right side structure|[Photo](https://drive.google.com/file/d/13yyp-sgcu0LNNqEp46dTIAVm154Kgke1)|
-|left_side_close_up.JPG|Close up of the left side structure|[Photo](https://drive.google.com/file/d/1wLIKjvOPCafX0Vlxo30Lwnah4A0p3qaS/)|
-|Ring+carrier_close_up.JPG|Close up of the inner mechanism|[Photo](https://drive.google.com/file/d/1FyYQh4XAfozECYoEj1SbI-XL4pL1RtfY/)|
-|ring_close_up.JPG|Close up of the ring and its holder|[Photo](https://drive.google.com/file/d/1vwPXbSGuAI6pLpXREB1CK-304CPGR6Qs)|
-|carrier_close_up.JPG|Close up sun and carrier|[Photo](https://drive.google.com/file/d/1WU8KTsL94cW_0TlH9SQV6PSYqZ29uYCT/view?usp=share_link)|
-|joystick_full_view.JPG|Top view of joystick|[Photo](https://drive.google.com/file/d/1oqqt5t1GAgovZ-C9y-axj_9s4HvweXMF/)|
-|joystick_interior.JPG|View of joystick without cover to see mechanism|[Photo](https://drive.google.com/file/d/1ZN-UuigLEgocgNdrgFCCrtRku-s_Edj5/)|
+### All Photos
+<details>
+  <summary>Click to view</summary>
 
+  |File Name|Description|Photo|
+  |----------|--------------|----------------|
+  |Full_view.JPG|Picture of full project|<img width="90" height="120" alt="Full_view" src="https://github.com/user-attachments/assets/bf3ff1b1-1865-4936-93af-b1ee39024fbb" />|
+  |eCVT_front_view.JPG|Front view of the mechanism|<img width="90" height="120" alt="ECVT_front_view" src="https://github.com/user-attachments/assets/68b3fb02-1b65-4b7d-9a73-938e71cb5678" />|
+  |eCVT_left_view.JPG|Left view of the mechanism|<img width="90" height="120" alt="ECVT_left_view" src="https://github.com/user-attachments/assets/4f8d7d72-1a10-4868-9f6b-6d7bd4577875" />|
+  |eCVT_back_view.JPG|Back view of the mechanism|<img width="90" height="120" alt="eCVT_back_view" src="https://github.com/user-attachments/assets/8e78ad91-a22c-4818-8b79-ff36b4c4b2e9" />|
+  |eCVT_right_view.JPG|Right view of the mechanism|<img width="90" height="120" alt="eCVT_right_view" src="https://github.com/user-attachments/assets/c6452538-fc94-4ad7-99c1-72d50bbb75eb" />|
+  |right_side_close_up.JPG|Close up of the right side structure|<img width="90" height="120" alt="right_side_close_up" src="https://github.com/user-attachments/assets/13c59920-17eb-452d-b5d9-875dd8b3429b" />|
+  |left_side_close_up.JPG|Close up of the left side structure|<img width="90" height="120" alt="left_side_close_up" src="https://github.com/user-attachments/assets/ef02d7a4-33f2-4c7b-b88c-7102d7a607e9" />|
+  |Ring+carrier_close_up.JPG|Close up of the inner mechanism|<img height="120" alt="Ring+carrier_close_up" src="https://github.com/user-attachments/assets/3d380b8a-da01-45e8-bfaf-e85455019d15" />|
+  |ring_close_up.JPG|Close up of the ring and its holder|<img width="90" height="120" alt="ring_close_up" src="https://github.com/user-attachments/assets/07ff45cf-4b90-40e8-b570-babad686bc97" />|
+  |carrier_close_up.JPG|Close up sun and carrier|<img width="90" height="120" alt="carrier_close_up" src="https://github.com/user-attachments/assets/c1188baf-d492-4815-8737-816156f0eb6e" />|
+  |joystick_full_view.JPG|Top view of joystick|<img width="90" height="120" alt="joystick_full_view" src="https://github.com/user-attachments/assets/8f425e60-4001-4353-ae8d-ec71a2a121f1" />|
+  |joystick_interior.JPG|View of joystick without cover to see mechanism|<img width="90" height="120" alt="joystick_interior" src="https://github.com/user-attachments/assets/89657bcc-8562-47b6-8042-a782bee0ddcf" />|
+</details>
 
 ### Video Demonstration Links
  - [Demonstration of eCVT](https://drive.google.com/file/d/1AhYpI9F_Cd5zOatm2PwSbGdc_tSj70io/view?usp=share_link)
