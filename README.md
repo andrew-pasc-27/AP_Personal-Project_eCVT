@@ -53,7 +53,7 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 ### The Theoretical Equation
 <details>
 
-  <summary> **Click to View Methodology**</summary>
+  <summary>Click to View Methodology</summary>
   
   The kinematic equation for a standard planetary (epicyclic) gear set, known as the **Willis Equation**, is:
 
