@@ -212,7 +212,7 @@ The engine motor has less influence on the final output than theory suggests. Ho
 ### All Photos
 <details>
   <summary>Click to view</summary>
-140*4/3
+  
   |File Name|Description|Photo|
   |----------|--------------|----------------|
   |Full_view.JPG|Picture of full project|<img width="90" height="120" alt="Full_view" src="https://github.com/user-attachments/assets/bf3ff1b1-1865-4936-93af-b1ee39024fbb" />|
