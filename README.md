@@ -50,7 +50,7 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
  - [The Empirical Equation](#regression-equation-analysis)
  - [Comparison](#vector-comparison)
 
-### Finding Theoretical Equation
+### The Theoretical Equation
 <details>
   <summary>Click to View Methodology</summary>
   
@@ -101,7 +101,7 @@ $$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
 
 ---
 
-### Empirical Model
+### The Empirical Model
 
 Empirical data on angular velocity was collected by systematically varying motor speeds and measuring the third motor speed. This data was processed through least squares regression to establish a constraint equation relating motor speeds.
 
