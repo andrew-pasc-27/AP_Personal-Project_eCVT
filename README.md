@@ -45,10 +45,10 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 - Custom color-sensor joystick for analog throttle input
 <details>
  <summary>Click to View Joystick Close Up</summary>
+ 
  | Joystick Exterior | Joystick Interior |
  |-------------------|-------------------|
  | <img src="https://github.com/user-attachments/assets/b888a258-9997-4a10-9957-4a15ebe75d19" width="220" alt="Joystick exterior"> | <img src="https://github.com/user-attachments/assets/f670a8f3-6bdc-486c-a031-2f9e1349093d" width="220" alt="Joystick interior"> |
-
 </details>
 
 ## Kinematics Equations
