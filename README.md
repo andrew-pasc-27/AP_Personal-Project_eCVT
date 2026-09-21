@@ -131,11 +131,11 @@ A more accurate equation relating the motor speeds can be derived by taking the 
  Taking the cross product of these vectors:
  
  $$
- \begin{bmatrix}
+ \begin{vmatrix}
  \mathbf{i} & \mathbf{j} & \mathbf{k} \\
  -159 & -107 & -78 \\
  615 & 250 & 215
- \end{bmatrix}
+ \end{vmatrix}
  $$
  
  *Vectors arranged in matrix form*
