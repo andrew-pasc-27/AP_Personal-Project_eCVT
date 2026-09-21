@@ -32,11 +32,16 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 
 - **Ring gear**: Built from four 11×11 quarter gear rings. A three-axle hub (120° spacing) transfers rotation to the output.
 - **Carrier & Sun**: Carrier uses axle connectors instead of beams due to gear size limits. Sun is a 36-tooth gear; planets are 16T + 36T. A 60-tooth turntable drives the carrier.
+  
+<details>
+ <summary>Click to see Overall Structure</summary>
+ 
+ ### Overall Structure
+ <img src="https://github.com/user-attachments/assets/03bee773-50c9-4768-89ed-c35c8ddd9289" width="500" alt="Front view of the structure">
 
-### Overall Structure
-<img src="https://github.com/user-attachments/assets/03bee773-50c9-4768-89ed-c35c8ddd9289" width="500" alt="Front view of the structure">
+ *MG1 and Engine on the left, MG2 on the right. Technic liftarm frame with a small flat-4 engine model.*
+</details>
 
-*MG1 and Engine on the left, MG2 on the right. Technic liftarm frame with a small flat-4 engine model.*
 
 ### Electrical / Control Components
 - EV3 brick as the central controller
@@ -121,13 +126,18 @@ A more accurate equation relating the motor speeds can be derived by taking the 
  <summary>Click to View Methodology</summary>
 
  I will use the coordinates $(-159, -107, -78)$ and $(615, 250, 215)$. <br>
- *Since $(0,0,0)$ exists for this gearset, it can be assumed as the starting point for both vectors. Therefore, each coordinate also represents a vector.*
+ *Since* $(0,0,0)$ *exists for this gearset, it can be assumed as the starting point for both vectors. Therefore, each coordinate also represents a vector.*
 
  Taking the cross product of these vectors:
  
- $$\begin{bmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k} \\\\ -159 & -107 & -78 \\\\ 615 & 250 & 215 \end{bmatrix}$$
+ $$
+ \begin{bmatrix}
+ \mathbf{i} & \mathbf{j} & \mathbf{k} \\\\
+ -159 & -107 & -78 \\\\
+ 615 & 250 & 215
+ \end{bmatrix}
+ $$
  
- <br>
  *Vectors arranged in matrix form*
  
  $$\langle -23005 + 19500, -47970 + 34185, -39750 + 65805 \rangle$$ <br>
