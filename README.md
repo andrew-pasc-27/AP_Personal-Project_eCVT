@@ -29,6 +29,7 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
  |-----------|--------------------|
  | <img src="https://github.com/user-attachments/assets/dbfd965f-d79c-4fea-9212-91a023d91ba7" width="320" alt="Ring gear close-up"> | <img   src="https://github.com/user-attachments/assets/7fe5148b-204e-41c8-8000-58254cd7af67" width="320" alt="Carrier and sun gear"> |
 </details>
+
 - **Ring gear**: Built from four 11×11 quarter gear rings. A three-axle hub (120° spacing) transfers rotation to the output.
 - **Carrier & Sun**: Carrier uses axle connectors instead of beams due to gear size limits. Sun is a 36-tooth gear; planets are 16T + 36T. A 60-tooth turntable drives the carrier.
 
@@ -123,7 +124,9 @@ A more accurate equation relating the motor speeds can be derived by taking the 
  *Since $(0,0,0)$ exists for this gearset, it can be assumed as the starting point for both vectors. Therefore, each coordinate also represents a vector.*
 
  Taking the cross product of these vectors:
+ 
  $$\begin{bmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k} \\\\ -159 & -107 & -78 \\\\ 615 & 250 & 215 \end{bmatrix}$$
+ 
  <br>
  *Vectors arranged in matrix form*
  
