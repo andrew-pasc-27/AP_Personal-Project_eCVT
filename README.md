@@ -137,9 +137,7 @@ $$
 
 Taking the cross product of these vectors:
  
-$$\langle -23005 + 19500, -47970 + 34185, -39750 + 65805 \rangle$$ <br>
- 
-*Cross product formula*
+$$\langle -23005 + 19500, -47970 + 34185, -39750 + 65805 \rangle$$
 
 **Normal Vector derived from cross products**: 
 
