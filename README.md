@@ -114,25 +114,20 @@ $$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
 Empirical data on angular velocity was collected by systematically varying motor speeds and measuring the third motor speed. 
 
 #### Simple Empirical Model
-A more accurate equation relating the motor speeds can be derived by taking the cross product of any two angular velocity vectors in the empirical dataset that are not collinear and not $(0,0,0)$.
+A more accurate equation relating the motor speeds can be derived by taking the cross product of any two angular velocity vectors in the empirical dataset that are not collinear and not $(0,0,0)$. <br>
 *The cross product will output a normal vector which can be translated into a 3D plane*
 <details>
  <summary>Click to View Methodology</summary>
 
- I will use the coordinates $(-159, -107, -78)$ and $(615, 250, 215)$.
+ I will use the coordinates $(-159, -107, -78)$ and $(615, 250, 215)$. <br>
  *Since $(0,0,0)$ exists for this gearset, it can be assumed as the starting point for both vectors. Therefore, each coordinate also represents a vector.*
 
  Taking the cross product of these vectors:
- $$
- \begin{bmatrix}
-   \mathbf{i} & \mathbf{j} & \mathbf{k} \\
-   -159 & -107 & -78 \\
-   615 & 250 & 215 
- \end{bmatrix}
- $$
+ $$\begin{bmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k} \\\\ -159 & -107 & -78 \\\\ 615 & 250 & 215 \end{bmatrix}$$
+ <br>
  *Vectors arranged in matrix form*
  
- $$\langle -23005 + 19500, -47970 + 34185, -39750 + 65805 \rangle$$
+ $$\langle -23005 + 19500, -47970 + 34185, -39750 + 65805 \rangle$$ <br>
  *Cross product formula*
 </details>
 
@@ -143,7 +138,7 @@ $$\vec{n_{\text{simple}}} = \langle -3505, -13785, 26055 \rangle$$
 **Simple Empirical Equation:**
 
 $$0 = -3505 \cdot \text{MG1} - 13785 \cdot \text{ENGINE} + 26055 \cdot \text{MG2}$$
-*Used $(0,0,0)$ as starting point, assumed coordinates of $(\text{MG1}, \text{ENGINE}, \text{MG2})$.*
+*Used* $(0,0,0)$ *as starting point, assumed coordinates of* $(\text{MG1}, \text{ENGINE}, \text{MG2})$ *.*
 
 ---
 
@@ -183,10 +178,10 @@ $$\vec{n_{\text{improved}}} = \langle -0.2605, -0.2506, 1 \rangle$$
   
   $$\vec{n_{\text{simple, normalized}}} = \frac{\vec{n_{\text{simple}}}}{26055} = \langle -0.134, -0.52, 1 \rangle$$
 
-  $$\vec{n_{\text{improved}}} = \langle -0.2605, -0.2506, 1 \rangle$$
+  $$\vec{n_{\text{improved}}} = \langle -0.2605, -0.2506, 1 \rangle$$ <br>
   *No need for normalization*
   
-  **Observation:** The simplified empirical vector shows that MG1 has less influence on the final output than theory predicts, but the improved empirical vector shows that the engine has less influence than theory predicts. The simplified empirical model sees variance likely due to sample bias; the improved model varies likely due to mechanical friction and gear path. *It is worth noting that the regression saw an $R^2 = 0.997$, which makes the variance between the simplified and improved models surprising.*
+  **Observation:** The simplified empirical vector shows that MG1 has less influence on the final output than theory predicts, but the improved empirical vector shows that the engine has less influence than theory predicts. The simplified empirical model sees variance likely due to sample bias; the improved model varies likely due to mechanical friction and gear path. *It is worth noting that the regression saw an* $R^2 = 0.997$ *, which makes the variance between the simplified and improved models surprising.*
   
   #### Angle Between Vectors
   *For this comparison, I will only use the theoretical and improved model, due to simplified model variance.*
@@ -204,8 +199,8 @@ $$\vec{n_{\text{improved}}} = \langle -0.2605, -0.2506, 1 \rangle$$
 
 #### Conclusion
 
-The engine motor has less influence on the final output than theory suggests. However, the theoretical and improved empirical models differ by only **8.4 degrees**, with the engine accounting for most of the difference. The small discrepancy can be attributed to mechanical constraints and friction losses in the system.
-The simplified model saw surprising variance (over $$15°$$ of difference over improved; it was not included in the final comparison). It is an example of sample bias but also reveals some inconsistencies in the data that the improved model aims to mitigate. 
+The engine motor has less influence on the final output than theory suggests. However, the theoretical and improved empirical models differ by only **8.4 degrees**, with the engine accounting for most of the difference. The small discrepancy can be attributed to mechanical constraints and friction losses in the system. <br>
+The simplified model saw surprising variance (over $$15°$$ of difference over improved; so it was not included in the final comparison). It is an example of sample bias but also reveals some inconsistencies in the data that the improved model aims to mitigate. 
 
 ---
 
@@ -266,7 +261,7 @@ From reading *Car and Driver* magazines to playing *Forza Horizon 4* on Xbox as 
 ### Takeaways
 First and foremost, I want to thank you if you made it this far. This project was one of the most fun and tiring projects I’ve taken on in the past few years, and the fact that another person has read this and likely shares my interest makes me feel happy (so thanks 🤗).
 
-My takeaways: 
+**My takeaways**: 
 - Do that project you’ve always wanted to do: I could only take in so much from a video, and I’ve wanted to build my own transmission for a while. I put it off for a while (personal commitments among other things), but I’m glad I started the project. I wish I had more time to really tinker with the project, so if you want to do something, just do it.
 - Sample bias is real: considering the mechanical link of the motors, I didn’t expect much sample bias when constructing my initial empirical model. I was quite surprised when the simple model varied more than the theoretical model did from the final empirical model. Always check your work and don’t assume everything always works because you tested it once.
 - Control matters just as much as the mechanism: Controlling the output was just as hard as creating the initial mechanism. I have come a lot more appreciative of all the work that goes in to creating a transmission and have become more intrigued at building one myself (whether from the control side or the mechanical side).
@@ -289,11 +284,11 @@ Once the gearset is created, add your motors of choice to the structure.
 *I recommend Mindstorms*
 
 For EV3 users:
-Download the ev3dev-stretch image and use a flasher of your choice to flash this image onto a miniSD card (2-32 GB)
-Insert this miniSD card into the EV3 and boot it. Connect it to your computer and download VSCode.
-On VSCode, download the ev3dev extension and begin coding using the correct imports.
-When ready to run, press *Run and Debug*, then allow the EV3 to connect to your computer. 
-Have fun!
+- Download the ev3dev-stretch image and use a flasher of your choice to flash this image onto a miniSD card (2-32 GB)
+- Insert this miniSD card into the EV3 and boot it. Connect it to your computer and download VSCode.
+- On VSCode, download the ev3dev extension and begin coding using the correct imports.
+- When ready to run, press *Run and Debug*, then allow the EV3 to connect to your computer.
+- Have fun!
 
 ---
 
