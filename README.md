@@ -123,6 +123,7 @@ Empirical data on angular velocity was collected by systematically varying motor
 A more accurate equation relating the motor speeds can be derived by taking the cross product of any two angular velocity vectors in the empirical dataset that are not collinear and not $(0,0,0)$. <br>
 *The cross product will output a normal vector which can be translated into a 3D plane*
 
+Vectors in Matrix Form:
 $$
  \begin{vmatrix}
  \mathbf{i} & \mathbf{j} & \mathbf{k} \\
@@ -131,14 +132,13 @@ $$
  \end{vmatrix}
  $$
 
- *Vectors in Matrix Form*
 <details>
  <summary>Click to View Methodology</summary>
 
  I will use the coordinates $(-159, -107, -78)$ and $(615, 250, 215)$. <br>
  *Since* $(0,0,0)$ *exists for this gearset, it can be assumed as the starting point for both vectors. Therefore, each coordinate also represents a vector.*
 
- Taking the cross product of these vectors:
+ Taking the cross product of these vectors using the above matrix:
  
  $$\langle -23005 + 19500, -47970 + 34185, -39750 + 65805 \rangle$$ <br>
  *Cross product formula*
@@ -150,7 +150,7 @@ $$\vec{n_{\text{simple}}} = \langle -3505, -13785, 26055 \rangle$$
 
 **Simple Empirical Equation:**
 
-$$0 = -3505 \cdot \text{MG1} - 13785 \cdot \text{ENGINE} + 26055 \cdot \text{MG2}$$
+$$0 = -3505 \cdot \text{MG1} - 13785 \cdot \text{ENGINE} + 26055 \cdot \text{MG2}$$ <br>
 *Used* $(0,0,0)$ *as starting point, assumed coordinates of* $(\text{MG1}, \text{ENGINE}, \text{MG2})$ *.*
 
 ---
