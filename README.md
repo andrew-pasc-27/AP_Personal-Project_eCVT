@@ -122,6 +122,16 @@ Empirical data on angular velocity was collected by systematically varying motor
 #### Simple Empirical Model
 A more accurate equation relating the motor speeds can be derived by taking the cross product of any two angular velocity vectors in the empirical dataset that are not collinear and not $(0,0,0)$. <br>
 *The cross product will output a normal vector which can be translated into a 3D plane*
+
+$$
+ \begin{vmatrix}
+ \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+ -159 & -107 & -78 \\
+ 615 & 250 & 215
+ \end{vmatrix}
+ $$
+
+ *Vectors in Matrix Form*
 <details>
  <summary>Click to View Methodology</summary>
 
@@ -129,16 +139,6 @@ A more accurate equation relating the motor speeds can be derived by taking the 
  *Since* $(0,0,0)$ *exists for this gearset, it can be assumed as the starting point for both vectors. Therefore, each coordinate also represents a vector.*
 
  Taking the cross product of these vectors:
- 
- $$
- \begin{vmatrix}
- \mathbf{i} & \mathbf{j} & \mathbf{k} \\
- -159 & -107 & -78 \\
- 615 & 250 & 215
- \end{vmatrix}
- $$
- 
- *Vectors arranged in matrix form*
  
  $$\langle -23005 + 19500, -47970 + 34185, -39750 + 65805 \rangle$$ <br>
  *Cross product formula*
