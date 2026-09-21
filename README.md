@@ -124,6 +124,7 @@ A more accurate equation relating the motor speeds can be derived by taking the 
 *The cross product will output a normal vector which can be translated into a 3D plane*
 
 Vectors in Matrix Form:
+
 $$
  \begin{vmatrix}
  \mathbf{i} & \mathbf{j} & \mathbf{k} \\
