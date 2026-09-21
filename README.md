@@ -1,5 +1,5 @@
 # AP_personal_project_eCVT
-Model of Toyota's hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms EV3. [Photo and Video Demonstrations](#photo-and-video-demonstrations).
+Model of Toyota's hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms EV3. 
 
 ## Navigating Main Folders
 |Folder|Contents|
@@ -12,6 +12,7 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
  - [Kinematics Equations](#kinematics-equations)
  - [Software](#software)
  - [Updates](#updates)
+ - [Purpose, Takeaway, and Initial Methodology](#personal-journey)
  - [Photo and Video Demonstrations](#photo-and-video-demonstrations)
 
 
@@ -21,11 +22,13 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 *Includes eCVT Model (back), Mindstorms control unit (front left), Joystick (front right)*
 
 ### Planetary Gearset
+<details>
+ <summary>Click to View Close Up Photos</summary>
 
-| Ring Gear | Carrier + Sun Gear |
-|-----------|--------------------|
-| <img src="https://github.com/user-attachments/assets/dbfd965f-d79c-4fea-9212-91a023d91ba7" width="320" alt="Ring gear close-up"> | <img src="https://github.com/user-attachments/assets/7fe5148b-204e-41c8-8000-58254cd7af67" width="320" alt="Carrier and sun gear"> |
-
+ | Ring Gear | Carrier + Sun Gear |
+ |-----------|--------------------|
+ | <img src="https://github.com/user-attachments/assets/dbfd965f-d79c-4fea-9212-91a023d91ba7" width="320" alt="Ring gear close-up"> | <img   src="https://github.com/user-attachments/assets/7fe5148b-204e-41c8-8000-58254cd7af67" width="320" alt="Carrier and sun gear"> |
+</details>
 - **Ring gear**: Built from four 11×11 quarter gear rings. A three-axle hub (120° spacing) transfers rotation to the output.
 - **Carrier & Sun**: Carrier uses axle connectors instead of beams due to gear size limits. Sun is a 36-tooth gear; planets are 16T + 36T. A 60-tooth turntable drives the carrier.
 
@@ -40,14 +43,18 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 - Two large motors for MG2 and Engine (24:40 and 12:60 reductions)
 - Built-in PID keeps motor speeds stable under load
 - Custom color-sensor joystick for analog throttle input
+<details>
+ <summary>Click to View Joystick Close Up</summary>
+ | Joystick Exterior | Joystick Interior |
+ |-------------------|-------------------|
+ | <img src="https://github.com/user-attachments/assets/b888a258-9997-4a10-9957-4a15ebe75d19" width="220" alt="Joystick exterior"> | <img src="https://github.com/user-attachments/assets/f670a8f3-6bdc-486c-a031-2f9e1349093d" width="220" alt="Joystick interior"> |
 
-| Joystick Exterior | Joystick Interior |
-|-------------------|-------------------|
-| <img src="https://github.com/user-attachments/assets/b888a258-9997-4a10-9957-4a15ebe75d19" width="220" alt="Joystick exterior"> | <img src="https://github.com/user-attachments/assets/f670a8f3-6bdc-486c-a031-2f9e1349093d" width="220" alt="Joystick interior"> |
+</details>
 
 ## Kinematics Equations
- - [The Theoretical Equation](#simplified-constraint-equation)
- - [The Empirical Equation](#regression-equation-analysis)
+ - [The Theoretical Equation](#simplified-theoretical-equation)
+ - [Simple Empirical Model](#simple-empirical-model)
+ - [The Empirical Equation](#improved-empirical-model)
  - [Comparison](#vector-comparison)
 
 ### The Theoretical Equation
@@ -92,7 +99,7 @@ Model of Toyota's hybrid transmission, known as the eCVT (electronic continuousl
 </details>
 
 
-#### Simplified Constraint Equation
+#### Simplified Theoretical Equation
 
 $$0 = -0.6 \cdot \text{MG1} - 0.9778 \cdot \text{ENGINE} + 2.334 \cdot \text{MG2}$$
 
@@ -102,11 +109,46 @@ $$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
 
 ---
 
-### The Empirical Model
+### The Empirical Models
 
-Empirical data on angular velocity was collected by systematically varying motor speeds and measuring the third motor speed. This data was processed through least squares regression to establish a constraint equation relating motor speeds.
+Empirical data on angular velocity was collected by systematically varying motor speeds and measuring the third motor speed. 
 
-#### Regression Equation Analysis
+#### Simple Empirical Model
+A more accurate equation relating the motor speeds can be derived by taking the cross product of any two angular velocity vectors in the empirical dataset that are not collinear and not $(0,0,0)$.
+*The cross product will output a normal vector which can be translated into a 3D plane*
+<details>
+ <summary>Click to View Methodology</summary>
+
+ I will use the coordinates $(-159, -107, -78)$ and $(615, 250, 215)$.
+ *Since $(0,0,0)$ exists for this gearset, it can be assumed as the starting point for both vectors. Therefore, each coordinate also represents a vector.*
+
+ Taking the cross product of these vectors:
+ $$
+ \begin{bmatrix}
+   \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+   -159 & -107 & -78 \\
+   615 & 250 & 215 
+ \end{bmatrix}
+ $$
+ *Vectors arranged in matrix form*
+ 
+ $$\langle -23005 + 19500, -47970 + 34185, -39750 + 65805 \rangle$$
+ *Cross product formula*
+</details>
+
+**Normal Vector derived from cross products**: 
+
+$$\vec{n_{\text{simple}}} = \langle -3505, -13785, 26055 \rangle$$
+
+**Simple Empirical Equation:**
+
+$$0 = -3505 \cdot \text{MG1} - 13785 \cdot \text{ENGINE} + 26055 \cdot \text{MG2}$$
+*Used $(0,0,0)$ as starting point, assumed coordinates of $(\text{MG1}, \text{ENGINE}, \text{MG2})$.*
+
+---
+
+#### Improved Empirical Model
+The accuracy of the model can be improved by relating all vectors. By processing the data through the least squares regression, a constraint equation relating motor speeds can be established.
 
 Using numpy's least squares algorithm (`lstsq()`), the empirical constraint equation is:
 
@@ -118,7 +160,7 @@ $$0 = -0.2605 \cdot \text{MG1} - 0.2506 \cdot \text{ENGINE} + \text{MG2} + 0.442
 
 The empirical normal vector is:
 
-$$\vec{n_{\text{empirical}}} = \langle -0.2605, -0.2506, 1 \rangle$$
+$$\vec{n_{\text{improved}}} = \langle -0.2605, -0.2506, 1 \rangle$$
 
 **Regression Quality:** $R^2 = 0.997$ (99.7% of variance explained)
 
@@ -130,17 +172,25 @@ $$\vec{n_{\text{empirical}}} = \langle -0.2605, -0.2506, 1 \rangle$$
  
   #### Vector Comparison
  
-  To compare the two models, we normalize the theoretical vector by dividing by its largest component:
+  To compare the three models, we normalize the normal vectors by dividing by their largest component:
   
   $$\vec{n_{\text{theory}}} = \langle -0.6, -0.9778, 2.334 \rangle$$
   
   $$\vec{n_{\text{theory, normalized}}} = \frac{\vec{n_{\text{theory}}}}{2.334} = \langle -0.257, -0.420, 1 \rangle$$
+
+
+  $$\vec{n_{\text{simple}}} = \langle -3505, -13785, 26055 \rangle$$
   
-  **Observation:** The empirical vector shows the engine has less influence on the final output than theory predicts, likely due to mechanical friction and gear path.
+  $$\vec{n_{\text{simple, normalized}}} = \frac{\vec{n_{\text{simple}}}}{26055} = \langle -0.134, -0.52, 1 \rangle$$
+
+  $$\vec{n_{\text{improved}}} = \langle -0.2605, -0.2506, 1 \rangle$$
+  *No need for normalization*
+  
+  **Observation:** The simplified empirical vector shows that MG1 has less influence on the final output than theory predicts, but the improved empirical vector shows that the engine has less influence than theory predicts. The simplified empirical model sees variance likely due to sample bias; the improved model varies likely due to mechanical friction and gear path. *It is worth noting that the regression saw an $R^2 = 0.997$, which makes the variance between the simplified and improved models surprising.*
   
   #### Angle Between Vectors
-  
-  To measure how closely the models agree, we calculate the angle between the normal vectors:
+  *For this comparison, I will only use the theoretical and improved model, due to simplified model variance.*
+  To measure how closely the theoretical and improved empirical models agree, we calculate the angle between the normal vectors:
   
   $$\vec{n_{\text{theory}}} \cdot \vec{n_{\text{empirical}}} = (-0.6)(-0.2605) + (-0.9778)(-0.2506) + (2.334)(1) = 2.736$$
   
@@ -154,7 +204,8 @@ $$\vec{n_{\text{empirical}}} = \langle -0.2605, -0.2506, 1 \rangle$$
 
 #### Conclusion
 
-The engine motor has less influence on the final output than theory suggests. However, the theoretical and empirical models differ by only **8.4 degrees**, with the engine accounting for most of the difference. The small discrepancy can be attributed to mechanical constraints and friction losses in the system.
+The engine motor has less influence on the final output than theory suggests. However, the theoretical and improved empirical models differ by only **8.4 degrees**, with the engine accounting for most of the difference. The small discrepancy can be attributed to mechanical constraints and friction losses in the system.
+The simplified model saw surprising variance (over $$15°$$ of difference over improved; it was not included in the final comparison). It is an example of sample bias but also reveals some inconsistencies in the data that the improved model aims to mitigate. 
 
 ---
 
@@ -192,8 +243,9 @@ The engine motor has less influence on the final output than theory suggests. Ho
 
 ## Updates
 
-### Future Updates (by file):
- - **[laptopside.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/laptop/laptopside.py):** Battery discharge model isn't accurate
+### Future Updates:
+ - Battery discharge model isn't accurate
+ - Engine model needs revision.
  - **[data_farm_2.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/analysis/data_farm_2.py):** Need to include all data collection methods
 
 ### Recent Updates (Latest first)
@@ -204,6 +256,44 @@ The engine motor has less influence on the final output than theory suggests. Ho
  - Introduced [ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/ev3controller.py) for standalone operation
  - Updated battery and acceleration models for increased accuracy (though not perfect)
  - Updated kinematic equations: MG1 and Engine coefficient now multiplied by -1 due to motor and gear repositioning.
+
+---
+
+## Personal Journey
+### Purpose
+From reading *Car and Driver* magazines to playing *Forza Horizon 4* on Xbox as a child, I was obsessed with cars. Experiencing the simplicity and smoothness of the eCVT in real life as a young driver, I began delving into the world of transmissions. I realized the only way to grasp the structure was to build it myself with the many LEGOs I acquired as a child, another childhood obsession of mine.
+
+### Takeaways
+First and foremost, I want to thank you if you made it this far. This project was one of the most fun and tiring projects I’ve taken on in the past few years, and the fact that another person has read this and likely shares my interest makes me feel happy (so thanks 🤗).
+
+My takeaways: 
+- Do that project you’ve always wanted to do: I could only take in so much from a video, and I’ve wanted to build my own transmission for a while. I put it off for a while (personal commitments among other things), but I’m glad I started the project. I wish I had more time to really tinker with the project, so if you want to do something, just do it.
+- Sample bias is real: considering the mechanical link of the motors, I didn’t expect much sample bias when constructing my initial empirical model. I was quite surprised when the simple model varied more than the theoretical model did from the final empirical model. Always check your work and don’t assume everything always works because you tested it once.
+- Control matters just as much as the mechanism: Controlling the output was just as hard as creating the initial mechanism. I have come a lot more appreciative of all the work that goes in to creating a transmission and have become more intrigued at building one myself (whether from the control side or the mechanical side).
+- Always have fun: Just have fun. I allowed my inner self loose with this project, which made it that much more enjoyable. You should too.
+
+### Methodology
+#### Creating the gearset
+The gearset needs three items:
+- sun gear
+- planet gear(s)
+- ring gear
+
+*Tip: Find your ring and sun first, then find planets that mesh*
+
+Use a gear with a hole in the middle to allow two inputs to converge at a single point, or connect the motor directly to the ring. 
+Add a lot of structure around the gearset too avoid it breaking at high speed. 
+
+#### Adding Control functionality
+Once the gearset is created, add your motors of choice to the structure.
+*I recommend Mindstorms*
+
+For EV3 users:
+Download the ev3dev-stretch image and use a flasher of your choice to flash this image onto a miniSD card (2-32 GB)
+Insert this miniSD card into the EV3 and boot it. Connect it to your computer and download VSCode.
+On VSCode, download the ev3dev extension and begin coding using the correct imports.
+When ready to run, press *Run and Debug*, then allow the EV3 to connect to your computer. 
+Have fun!
 
 ---
 
