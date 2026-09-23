@@ -1,5 +1,5 @@
 # AP_personal_project_eCVT
-Model of Toyota's hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms EV3. 
+Three motor model of Toyota's hybrid transmission, known as the eCVT (electronic continuously variable transmission). The mechanism was primarily built using LEGO Technic and LEGO Mindstorms EV3. 
 
 ## Navigating Main Folders
 |Folder|Contents|
