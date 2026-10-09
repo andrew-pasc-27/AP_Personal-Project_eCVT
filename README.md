@@ -264,7 +264,7 @@ The simplified model saw surprising variance (over $$15°$$ of difference over i
 
 ## Personal Journey
 ### Purpose
-From reading *Car and Driver* magazines to playing *Forza Horizon 4* on Xbox as a child, I was obsessed with cars. Experiencing the simplicity and smoothness of the eCVT in real life as a young driver, I began delving into the world of transmissions. I realized the only way to grasp the structure was to build it myself with the many LEGOs I acquired as a child, another childhood obsession of mine.
+From the first time I read a *Car and Driver* magazine to the first time I experienced *Forza Horizon 4* on my racing simulator, I have been obsessed with cars. Experiencing the simplicity and smoothness of the eCVT in real life as a young driver, I began delving into the world of transmissions. I realized the only way to grasp the structure was to build it myself with the many LEGOs I acquired as a child, another childhood obsession of mine.
 
 ### Takeaways
 First and foremost, I want to thank you if you made it this far. This project was one of the most fun and tiring projects I’ve taken on in the past few years, and the fact that another person has read this and likely shares my interest makes me feel happy (so thanks 🤗).
