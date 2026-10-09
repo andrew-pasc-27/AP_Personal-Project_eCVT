@@ -285,7 +285,7 @@ The gearset needs three items:
 *Tip: Find your ring and sun first, then find planets that mesh*
 
 Use a gear with a hole in the middle to allow two inputs to converge at a single point, or connect the motor directly to the ring. 
-Add a lot of structure around the gearset too avoid it breaking at high speed. 
+Add a lot of structure around the gearset to avoid breaking at high speed. 
 
 #### Adding Control functionality
 Once the gearset is created, add your motors of choice to the structure.
@@ -303,8 +303,7 @@ For EV3 users:
 ## Photo and Video Demonstrations
 
 ### All Photos
-<details>
-  <summary>Click to view</summary>
+
   
   |File Name|Description|Photo|
   |----------|--------------|----------------|
@@ -320,7 +319,6 @@ For EV3 users:
   |carrier_close_up.JPG|Close up sun and carrier|<img width="90" height="120" alt="carrier_close_up" src="https://github.com/user-attachments/assets/c1188baf-d492-4815-8737-816156f0eb6e" />|
   |joystick_full_view.JPG|Top view of joystick|<img width="90" height="120" alt="joystick_full_view" src="https://github.com/user-attachments/assets/8f425e60-4001-4353-ae8d-ec71a2a121f1" />|
   |joystick_interior.JPG|View of joystick without cover to see mechanism|<img width="90" height="120" alt="joystick_interior" src="https://github.com/user-attachments/assets/89657bcc-8562-47b6-8042-a782bee0ddcf" />|
-</details>
 
 ### Video Demonstration Links
  - [Demonstration of eCVT](https://drive.google.com/file/d/1AhYpI9F_Cd5zOatm2PwSbGdc_tSj70io/view?usp=share_link)
