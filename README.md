@@ -221,6 +221,8 @@ The simplified model saw surprising variance (over $$15°$$ of difference over i
 
 ### Code File Descriptions (Latest file first):
 
+ - **[new_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/new_ev3controller.py):** Added new Engine class, which properly determines the engine speed based off multiple cost functions. Creep function and a more accurate hybrid model have also been added.
+
  - **[ev3controller_with_sockets.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/ev3controller_with_sockets.py)** and **[laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/laptop/laptop_to_ev3controller.py):** Control code that establishes socket connection between laptop and EV3 brick, allowing real-time telemetry visualization on the laptop while the EV3 runs the eCVT simulation.
 
  - **[ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/ev3controller.py):** A standalone control code file using color sensor joystick, combining most of the features from the socket-based implementation without requiring a laptop connection.
@@ -252,12 +254,10 @@ The simplified model saw surprising variance (over $$15°$$ of difference over i
 ## Updates
 
 ### Future Updates:
- - Battery discharge model isn't accurate
- - Engine model needs revision.
  - **[data_farm_2.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/analysis/data_farm_2.py):** Need to include all data collection methods
 
-### Recent Updates (Latest first)
-
+### Recent Updates (Latest first):
+ - Introduced Engine class, updated battery discharge model, creep function.
  - Introduced [ev3controller_with_sockets.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/ev3controller_with_sockets.py) and [laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/laptop/laptop_to_ev3controller.py) for improved socket-based control with real-time visualization
  - Reduced runtime between iterations by improving LCD display dynamics.
  - Fixed mechanical clicking issue by improving ring gear connector and separating parts
