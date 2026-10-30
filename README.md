@@ -11,6 +11,7 @@ Three motor model of Toyota's hybrid transmission, known as the eCVT (electronic
 |--------|--------|
 |**Code Files**|All code files, split into Laptop, Analysis, and EV3 files|
 |**Data**|CSV file with empirical data|
+|**[requirements.txt](requirements.txt)**|Project Dependecies|
 
 ## Contents
  - [Hardware](#hardware)
