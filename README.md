@@ -326,6 +326,6 @@ For EV3 users:
   |joystick_interior.JPG|View of joystick without cover to see mechanism|<img width="90" height="120" alt="IMG_8262" src="https://github.com/user-attachments/assets/03038eda-2a97-43de-aa69-d8803fad6ac8" width="90"/> |
 
 ### Video Demonstration Links
- - [Demonstration of eCVT](https://drive.google.com/file/d/1AhYpI9F_Cd5zOatm2PwSbGdc_tSj70io/view?usp=share_link)
- - [Demonstration of Motor Data Visualization](https://drive.google.com/file/d/15FJaNPaWlunaGZE18toF5-Q3PvSbY2L1/view?usp=share_link)
+ - [Demonstration of eCVT](https://youtube.com/shorts/jn_OX8D9L44?feature=share)
+ - [Demonstration of eCVT with Motor Data Visualization](https://youtu.be/W6yGvVlN_8g)
 
