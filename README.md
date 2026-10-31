@@ -24,7 +24,7 @@ Three motor model of Toyota's hybrid transmission, known as the eCVT (electronic
 
 ## Hardware
 ### Full Model View
-![Full Model View](https://github.com/user-attachments/assets/8f8e9c92-b1e3-4266-80a2-9ada66f4c43b)
+<img width="4284" height="5712" alt="IMG_8246" src="https://github.com/user-attachments/assets/360ac9b0-39a1-4811-b689-6709ddd8f0af" />
 *Includes eCVT Model (back), Mindstorms control unit (front left), Joystick (front right)*
 
 ### Planetary Gearset
@@ -43,8 +43,7 @@ Three motor model of Toyota's hybrid transmission, known as the eCVT (electronic
  <summary>Click to see Overall Structure</summary>
  
  ### Overall Structure
- <img src="https://github.com/user-attachments/assets/03bee773-50c9-4768-89ed-c35c8ddd9289" width="500" alt="Front view of the structure">
-
+ <img width="3024" height="4032" alt="IMG_2173" src="https://github.com/user-attachments/assets/2ff1d231-59b6-4461-b359-9f594a41b05d" />
  *MG1 and Engine on the left, MG2 on the right. Technic liftarm frame with a small flat-4 engine model.*
 </details>
 
@@ -54,13 +53,13 @@ Three motor model of Toyota's hybrid transmission, known as the eCVT (electronic
 - Medium motor for MG1 (12:20 reduction for higher torque)
 - Two large motors for MG2 and Engine (24:40 and 12:60 reductions)
 - Built-in PID keeps motor speeds stable under load
-- Custom color-sensor joystick for analog throttle input
+- Custom color-sensor pedal box for analog throttle input
 <details>
  <summary>Click to View Joystick Close Up</summary>
  
- | Joystick Exterior | Joystick Interior |
+ | Pedal Box Exterior | Pedal Box Interior |
  |-------------------|-------------------|
- | <img src="https://github.com/user-attachments/assets/b888a258-9997-4a10-9957-4a15ebe75d19" width="220" alt="Joystick exterior"> | <img src="https://github.com/user-attachments/assets/f670a8f3-6bdc-486c-a031-2f9e1349093d" width="220" alt="Joystick interior"> |
+ |<img width="4284" height="5712" alt="IMG_8263" src="https://github.com/user-attachments/assets/6ba5354e-c82d-4b05-8ee4-c4ddfdf1fd3d" width="220" /> | <img width="3024" height="4032" alt="IMG_8262" src="https://github.com/user-attachments/assets/03038eda-2a97-43de-aa69-d8803fad6ac8" width="220"/> |
 </details>
 
 ## Kinematics Equations
@@ -246,7 +245,7 @@ The simplified model saw surprising variance (over $$15°$$ of difference over i
 
 ### Software Implementations:
 
- - **Color Sensor Joystick:** Using `.reflected_light_intensity` attribute, an EV3 color sensor was used for the gas/brake joystick. As the joystick lever moves closer to the sensor, the intensity increases, allowing for analog control input.
+ - **Color Sensor Pedal Box:** Using `.reflected_light_intensity` attribute, an EV3 color sensor was used for the gas/brake pedal box. A differential allows the gas pedal to move a reflective tile towards the color sensor when pressed, while the brake pedal moves it backwards when pressed. These sensor readings are mapped to acceleration values.
 
  - **Laptop and EV3 connection:** Used Socket library. The EV3 runs its code file, setting up a socket server and listening for any connection requests. Concurrently, the laptop initializes its socket client and connects to the EV3's server, allowing bidirectional communication for telemetry and control.
 
@@ -313,8 +312,8 @@ For EV3 users:
   
   |File Name|Description|Photo|
   |----------|--------------|----------------|
-  |Full_view.JPG|Picture of full project|<img width="90" height="120" alt="Full_view" src="https://github.com/user-attachments/assets/bf3ff1b1-1865-4936-93af-b1ee39024fbb" />|
-  |eCVT_front_view.JPG|Front view of the mechanism|<img width="90" height="120" alt="ECVT_front_view" src="https://github.com/user-attachments/assets/68b3fb02-1b65-4b7d-9a73-938e71cb5678" />|
+  |Full_view.JPG|Picture of full project|<img width="4284" height="5712" alt="IMG_8246" src="https://github.com/user-attachments/assets/360ac9b0-39a1-4811-b689-6709ddd8f0af" width="90"/>|
+  |eCVT_front_view.JPG|Front view of the mechanism|<img width="3024" height="4032" alt="IMG_2173" src="https://github.com/user-attachments/assets/2ff1d231-59b6-4461-b359-9f594a41b05d" width="90"/>|
   |eCVT_left_view.JPG|Left view of the mechanism|<img width="90" height="120" alt="ECVT_left_view" src="https://github.com/user-attachments/assets/4f8d7d72-1a10-4868-9f6b-6d7bd4577875" />|
   |eCVT_back_view.JPG|Back view of the mechanism|<img width="90" height="120" alt="eCVT_back_view" src="https://github.com/user-attachments/assets/8e78ad91-a22c-4818-8b79-ff36b4c4b2e9" />|
   |eCVT_right_view.JPG|Right view of the mechanism|<img width="90" height="120" alt="eCVT_right_view" src="https://github.com/user-attachments/assets/c6452538-fc94-4ad7-99c1-72d50bbb75eb" />|
@@ -323,8 +322,8 @@ For EV3 users:
   |Ring+carrier_close_up.JPG|Close up of the inner mechanism|<img height="120" alt="Ring+carrier_close_up" src="https://github.com/user-attachments/assets/3d380b8a-da01-45e8-bfaf-e85455019d15" />|
   |ring_close_up.JPG|Close up of the ring and its holder|<img width="90" height="120" alt="ring_close_up" src="https://github.com/user-attachments/assets/07ff45cf-4b90-40e8-b570-babad686bc97" />|
   |carrier_close_up.JPG|Close up sun and carrier|<img width="90" height="120" alt="carrier_close_up" src="https://github.com/user-attachments/assets/c1188baf-d492-4815-8737-816156f0eb6e" />|
-  |joystick_full_view.JPG|Top view of joystick|<img width="90" height="120" alt="joystick_full_view" src="https://github.com/user-attachments/assets/8f425e60-4001-4353-ae8d-ec71a2a121f1" />|
-  |joystick_interior.JPG|View of joystick without cover to see mechanism|<img width="90" height="120" alt="joystick_interior" src="https://github.com/user-attachments/assets/89657bcc-8562-47b6-8042-a782bee0ddcf" />|
+  |joystick_full_view.JPG|Top view of joystick|<img width="3024" height="4032" alt="IMG_8262" src="https://github.com/user-attachments/assets/03038eda-2a97-43de-aa69-d8803fad6ac8" width="90"/>|
+  |joystick_interior.JPG|View of joystick without cover to see mechanism|<img width="3024" height="4032" alt="IMG_8262" src="https://github.com/user-attachments/assets/03038eda-2a97-43de-aa69-d8803fad6ac8" width="90"/> |
 
 ### Video Demonstration Links
  - [Demonstration of eCVT](https://drive.google.com/file/d/1AhYpI9F_Cd5zOatm2PwSbGdc_tSj70io/view?usp=share_link)
