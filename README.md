@@ -55,7 +55,7 @@ Three motor model of Toyota's hybrid transmission, known as the eCVT (electronic
 - Built-in PID keeps motor speeds stable under load
 - Custom color-sensor pedal box for analog throttle input
 <details>
- <summary>Click to View Joystick Close Up</summary>
+ <summary>Click to View Pedal Box Close Up</summary>
  
  | Pedal Box Exterior | Pedal Box Interior |
  |-------------------|-------------------|
@@ -312,8 +312,8 @@ For EV3 users:
   
   |File Name|Description|Photo|
   |----------|--------------|----------------|
-  |Full_view.JPG|Picture of full project|<img width="4284" height="5712" alt="IMG_8246" src="https://github.com/user-attachments/assets/360ac9b0-39a1-4811-b689-6709ddd8f0af" width="90"/>|
-  |eCVT_front_view.JPG|Front view of the mechanism|<img width="3024" height="4032" alt="IMG_2173" src="https://github.com/user-attachments/assets/2ff1d231-59b6-4461-b359-9f594a41b05d" width="90"/>|
+  |Full_view.JPG|Picture of full project|<img width="90" height="120" alt="IMG_8246" src="https://github.com/user-attachments/assets/360ac9b0-39a1-4811-b689-6709ddd8f0af" width="90"/>|
+  |eCVT_front_view.JPG|Front view of the mechanism|<img width="90" height="120" alt="IMG_2173" src="https://github.com/user-attachments/assets/2ff1d231-59b6-4461-b359-9f594a41b05d" width="90"/>|
   |eCVT_left_view.JPG|Left view of the mechanism|<img width="90" height="120" alt="ECVT_left_view" src="https://github.com/user-attachments/assets/4f8d7d72-1a10-4868-9f6b-6d7bd4577875" />|
   |eCVT_back_view.JPG|Back view of the mechanism|<img width="90" height="120" alt="eCVT_back_view" src="https://github.com/user-attachments/assets/8e78ad91-a22c-4818-8b79-ff36b4c4b2e9" />|
   |eCVT_right_view.JPG|Right view of the mechanism|<img width="90" height="120" alt="eCVT_right_view" src="https://github.com/user-attachments/assets/c6452538-fc94-4ad7-99c1-72d50bbb75eb" />|
@@ -322,8 +322,8 @@ For EV3 users:
   |Ring+carrier_close_up.JPG|Close up of the inner mechanism|<img height="120" alt="Ring+carrier_close_up" src="https://github.com/user-attachments/assets/3d380b8a-da01-45e8-bfaf-e85455019d15" />|
   |ring_close_up.JPG|Close up of the ring and its holder|<img width="90" height="120" alt="ring_close_up" src="https://github.com/user-attachments/assets/07ff45cf-4b90-40e8-b570-babad686bc97" />|
   |carrier_close_up.JPG|Close up sun and carrier|<img width="90" height="120" alt="carrier_close_up" src="https://github.com/user-attachments/assets/c1188baf-d492-4815-8737-816156f0eb6e" />|
-  |joystick_full_view.JPG|Top view of joystick|<img width="3024" height="4032" alt="IMG_8262" src="https://github.com/user-attachments/assets/03038eda-2a97-43de-aa69-d8803fad6ac8" width="90"/>|
-  |joystick_interior.JPG|View of joystick without cover to see mechanism|<img width="3024" height="4032" alt="IMG_8262" src="https://github.com/user-attachments/assets/03038eda-2a97-43de-aa69-d8803fad6ac8" width="90"/> |
+  |joystick_full_view.JPG|Top view of joystick|<img width="90" height="120" alt="IMG_8262" src="https://github.com/user-attachments/assets/03038eda-2a97-43de-aa69-d8803fad6ac8" width="90"/>|
+  |joystick_interior.JPG|View of joystick without cover to see mechanism|<img width="90" height="120" alt="IMG_8262" src="https://github.com/user-attachments/assets/03038eda-2a97-43de-aa69-d8803fad6ac8" width="90"/> |
 
 ### Video Demonstration Links
  - [Demonstration of eCVT](https://drive.google.com/file/d/1AhYpI9F_Cd5zOatm2PwSbGdc_tSj70io/view?usp=share_link)
