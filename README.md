@@ -337,7 +337,7 @@ For EV3 users:
   |Ring+carrier_close_up.JPG|Close up of the inner mechanism|<img height="120" alt="Ring+carrier_close_up" src="https://github.com/user-attachments/assets/3d380b8a-da01-45e8-bfaf-e85455019d15" />|
   |ring_close_up.JPG|Close up of the ring and its holder|<img width="90" height="120" alt="ring_close_up" src="https://github.com/user-attachments/assets/07ff45cf-4b90-40e8-b570-babad686bc97" />|
   |carrier_close_up.JPG|Close up sun and carrier|<img width="90" height="120" alt="carrier_close_up" src="https://github.com/user-attachments/assets/c1188baf-d492-4815-8737-816156f0eb6e" />|
-  |joystick_full_view.JPG|Top view of joystick|<img width="90" height="120" alt="IMG_8262" src="https://github.com/user-attachments/assets/03038eda-2a97-43de-aa69-d8803fad6ac8" width="90"/>|
+  |joystick_full_view.JPG|Top view of joystick|<img width="90" height="120" alt="IMG_8263" src="https://github.com/user-attachments/assets/2036d9af-c0da-47ed-a56c-f24e809e58f2" />|
   |joystick_interior.JPG|View of joystick without cover to see mechanism|<img width="90" height="120" alt="IMG_8262" src="https://github.com/user-attachments/assets/03038eda-2a97-43de-aa69-d8803fad6ac8" width="90"/> |
 
 ### Video Demonstration Links
