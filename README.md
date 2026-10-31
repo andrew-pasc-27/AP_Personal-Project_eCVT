@@ -215,6 +215,10 @@ $$\vec{n_{\text{improved}}} = \langle -0.2605, -0.2506, 1 \rangle$$
 The engine motor has less influence on the final output than theory suggests. However, the theoretical and improved empirical models differ by only **8.4 degrees**, with the engine accounting for most of the difference. The small discrepancy can be attributed to mechanical constraints and friction losses in the system. <br>
 The simplified model saw surprising variance (over $$15°$$ of difference over improved; so it was not included in the final comparison). It is an example of sample bias but also reveals some inconsistencies in the data that the improved model aims to mitigate. 
 
+Graph of Plane Equations:
+<img width="1023" height="636" alt="Screenshot 2026-10-28 at 10 32 52 AM" src="https://github.com/user-attachments/assets/c3f8a058-8445-47ed-8bd9-dfb23697d9de" />
+
+
 ---
 
 ## Software
@@ -258,12 +262,11 @@ The simplified model saw surprising variance (over $$15°$$ of difference over i
 
 ### Recent Updates (Latest first):
  - Introduced Engine class, updated battery discharge model, creep function.
+ - Introduced gas/brake pedal box, no more joystick.
  - Introduced [ev3controller_with_sockets.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/ev3controller_with_sockets.py) and [laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/laptop/laptop_to_ev3controller.py) for improved socket-based control with real-time visualization
  - Reduced runtime between iterations by improving LCD display dynamics.
  - Fixed mechanical clicking issue by improving ring gear connector and separating parts
  - Introduced [ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/ev3controller.py) for standalone operation
- - Updated battery and acceleration models for increased accuracy (though not perfect)
- - Updated kinematic equations: MG1 and Engine coefficient now multiplied by -1 due to motor and gear repositioning.
 
 ---
 
