@@ -215,8 +215,10 @@ $$\vec{n_{\text{improved}}} = \langle -0.2605, -0.2506, 1 \rangle$$
 The engine motor has less influence on the final output than theory suggests. However, the theoretical and improved empirical models differ by only **8.4 degrees**, with the engine accounting for most of the difference. The small discrepancy can be attributed to mechanical constraints and friction losses in the system. <br>
 The simplified model saw surprising variance (over $$15°$$ of difference over improved; so it was not included in the final comparison). It is an example of sample bias but also reveals some inconsistencies in the data that the improved model aims to mitigate. 
 
-Graph of Plane Equations:
+**Graph of Plane Equations:**
 <img width="1023" height="636" alt="Screenshot 2026-10-28 at 10 32 52 AM" src="https://github.com/user-attachments/assets/c3f8a058-8445-47ed-8bd9-dfb23697d9de" />
+
+*Where the blue plane represents the theoretical equation and the red plane represents the improved empirical equation*
 
 
 ---
@@ -282,6 +284,16 @@ First and foremost, I want to thank you if you made it this far. This project wa
 - Sample bias is real: considering the mechanical link of the motors, I didn’t expect much sample bias when constructing my initial empirical model. I was quite surprised when the simple model varied more than the theoretical model did from the final empirical model. Always check your work and don’t assume everything always works because you tested it once.
 - Control matters just as much as the mechanism: Controlling the output was just as hard as creating the initial mechanism. I have come a lot more appreciative of all the work that goes in to creating a transmission and have become more intrigued at building one myself (whether from the control side or the mechanical side).
 - Always have fun: Just have fun. I allowed my inner self loose with this project, which made it that much more enjoyable. You should too.
+
+### Failures and Iterations
+A project wouldn't be much of a project without something going wrong. A few things that went wrong and were fixed:
+
+- **Mechanical binding and clicking**
+  In my initial model, the carrier and planet gears often collided with the ring gear holder at high speeds. I updated the carrier and made the ring holder thinner so the parts could be spaced apart.    There was also a clicking noise every revolution of the carrier, which was solved through a stronger frame.
+- **Theoretical and Simple Models**
+  My initial theoretical model did not account for the differing gear ratios that arose due to the gear reductions I put in place; this made it very inaccurate. My simple empirical model using the cross product two angular velocity vectors outputted a plausible normal vector, but it was more inaccurate than the corrected theoretical model. I updated this using a least squares regression.
+- **Battery and acceleration models**
+  Early models were too sensitive or were not accurate to how a real car responds. Code has been updated since then to more accurately model a hybrid vehicle.
 
 ### Methodology
 #### Creating the gearset
