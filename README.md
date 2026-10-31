@@ -288,11 +288,11 @@ First and foremost, I want to thank you if you made it this far. This project wa
 ### Failures and Iterations
 A project wouldn't be much of a project without something going wrong. A few things that went wrong and were fixed:
 
-- **Mechanical binding and clicking**
+- **Mechanical binding and clicking:**
   In my initial model, the carrier and planet gears often collided with the ring gear holder at high speeds. I updated the carrier and made the ring holder thinner so the parts could be spaced apart.    There was also a clicking noise every revolution of the carrier, which was solved through a stronger frame.
-- **Theoretical and Simple Models**
+- **Theoretical and Simple Models:**
   My initial theoretical model did not account for the differing gear ratios that arose due to the gear reductions I put in place; this made it very inaccurate. My simple empirical model using the cross product two angular velocity vectors outputted a plausible normal vector, but it was more inaccurate than the corrected theoretical model. I updated this using a least squares regression.
-- **Battery and acceleration models**
+- **Battery and acceleration models:**
   Early models were too sensitive or were not accurate to how a real car responds. Code has been updated since then to more accurately model a hybrid vehicle.
 
 ### Methodology
