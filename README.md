@@ -4,7 +4,7 @@ Three motor model of Toyota's hybrid transmission, known as the eCVT (electronic
 **Key Results**
 - Theoretical vs. improved empirical models differ by only **8.4°**
 - Least-squares regression: **R² = 0.997**
-- Full loop: mechanical build → theoretical kinematics → empirical validation
+- Full loop: mechanical build → theoretical kinematics → empirical validation → custom PID control
 
 ## Navigating Main Folders
 |Folder|Contents|
@@ -52,7 +52,7 @@ Three motor model of Toyota's hybrid transmission, known as the eCVT (electronic
 - EV3 brick as the central controller
 - Medium motor for MG1 (12:20 reduction for higher torque)
 - Two large motors for MG2 and Engine (24:40 and 12:60 reductions)
-- Built-in PID keeps motor speeds stable under load
+- Custom PID controller keeps motor speeds stable under load
 - Custom color-sensor pedal box for analog throttle input
 <details>
  <summary>Click to View Pedal Box Close Up</summary>
@@ -227,7 +227,7 @@ The simplified model saw surprising variance (over $$15°$$ of difference over i
 
 ### Code File Descriptions (Latest file first):
 
- - **[new_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/new_ev3controller.py):** Added new Engine class, which properly determines the engine speed based off multiple cost functions. Creep function and a more accurate hybrid model have also been added.
+ - **[new_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/new_ev3controller.py):** Added new Engine class, which properly determines the engine speed based off multiple cost functions. Added custom PID controller for insight and proper tuning for my transmission. Creep function and a more accurate hybrid model have also been added.
 
  - **[ev3controller_with_sockets.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/ev3controller_with_sockets.py)** and **[laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/laptop/laptop_to_ev3controller.py):** Control code that establishes socket connection between laptop and EV3 brick, allowing real-time telemetry visualization on the laptop while the EV3 runs the eCVT simulation.
 
@@ -263,7 +263,7 @@ The simplified model saw surprising variance (over $$15°$$ of difference over i
  - **[data_farm_2.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/analysis/data_farm_2.py):** Need to include all data collection methods
 
 ### Recent Updates (Latest first):
- - Introduced Engine class, updated battery discharge model, creep function.
+ - Introduced Engine class, custom PID controller, updated battery discharge model, creep function.
  - Introduced gas/brake pedal box, no more joystick.
  - Introduced [ev3controller_with_sockets.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/ev3/ev3controller_with_sockets.py) and [laptop_to_ev3controller.py](https://github.com/andrew-pasc-27/AP_Personal-Project_eCVT/blob/main/code%20files/laptop/laptop_to_ev3controller.py) for improved socket-based control with real-time visualization
  - Reduced runtime between iterations by improving LCD display dynamics.
