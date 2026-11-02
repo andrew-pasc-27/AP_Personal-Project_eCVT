@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import time
-from ev3dev2.motor import LargeMotor, MediumMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, SpeedDPS
+from ev3dev2.motor import LargeMotor, MediumMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C
 from ev3dev2.display import Display
 from ev3dev2.sensor.lego import ColorSensor
 from ev3dev2.sensor import INPUT_4
@@ -35,7 +35,28 @@ cs = ColorSensor(INPUT_4) #joystick sensor
 motor_a = MediumMotor(OUTPUT_A) #mg1
 motor_b = LargeMotor(OUTPUT_B) #engine
 motor_c = LargeMotor(OUTPUT_C) #mg2 (wrote this way because its easier to understand which port)
+motor_a.command = 'run-direct'
+motor_b.command = 'run-direct'
+motor_c.command = 'run-direct'
 
+class PIDController:
+    def __init__(self, kp, ki, kd, motor):
+        self.kp = kp
+        self.ki = ki
+        self.kd = kd
+        self.motor = motor
+        self.integral = 0.0
+        self.previous_error = 0.0
+    
+    def update(self, target_speed):
+        current_speed = self.motor.speed #get the current speed
+        error = target_speed - current_speed #find how far off
+        self.integral += error * TIME_STEP #integral multiplied by "dt"
+        derivative = (error - self.previous_error) / TIME_STEP #derivative is the change in error over time
+        output = self.kp * error + self.ki * self.integral + self.kd * derivative #add everything up
+        output = max(-100, min(100, output)) #clamp since duty cycle can only be between -100 and 100
+        self.motor.duty_cycle_sp = int(round(output)) #output
+        self.previous_error = error #for next loop
 
 def target_speed_from_joystick(value):
     #finds reflected light intensity (in my build it goes from 16-100, with a center of 32)
@@ -126,10 +147,10 @@ def calculate_motor_speeds(current_speed, speed_adder, joystick_value=None):
     engine.rpm = target_engine
     return mg1, target_engine, mg2
 
-def set_motor_speeds(mg1, engine, mg2): #just put it in a function ig
-    motor_a.on(SpeedDPS(mg1))
-    motor_b.on(SpeedDPS(engine))
-    motor_c.on(SpeedDPS(mg2))
+def set_motor_speeds(i, j, k): #just put it in a function ig
+    mg1.update(i)
+    engine_controller.update(j)
+    mg2.update(k)
 
 def update_display(message = None):
     global current_speed, current_gear, battery_low, hybrid_battery
@@ -218,6 +239,9 @@ battery_low = False
 hybrid_battery = HYBRID_BATTERY_START
 frame_count = 0
 next_loop = time.time()
+mg1 = PIDController(0.1, 0.01, 0.05, motor_a)
+mg2 = PIDController(0.1, 0.01, 0.05, motor_c)
+engine_controller = PIDController(0.1, 0.01, 0.05, motor_b)
 
 try:
     while True: #isn't this such an elegant while loop
