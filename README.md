@@ -342,5 +342,5 @@ For EV3 users:
 
 ### Video Demonstration Links
  - [Demonstration of eCVT](https://youtube.com/shorts/jn_OX8D9L44?feature=share)
- - [Demonstration of eCVT with Motor Data Visualization](https://youtu.be/W6yGvVlN_8g)
+ - [Demonstration of eCVT with Motor Data Visualization](https://youtube.com/shorts/bhpzd6ihE0Y?feature=share)
 
